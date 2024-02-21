@@ -1,14 +1,16 @@
+import Header from "@/components/Header/Header";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ListScreen from "@/screens/ListScreen";
 
-import { StyleSheet, View } from "react-native";
+import { SafeAreaView, StyleSheet } from "react-native";
 
 export default function App() {
   return (
     <ThemeProvider>
-      <View style={styles.container}>
+      <SafeAreaView style={styles.container}>
+        <Header />
         <ListScreen />
-      </View>
+      </SafeAreaView>
     </ThemeProvider>
   );
 }
