@@ -1,13 +1,20 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import AddModal from "./modals/AddModal";
 const Header = () => {
   const { theme } = useTheme();
+  const [isAddVisible, setIsAddVisible] = useState(false);
+
+  const toggleAddModal = () => {
+    setIsAddVisible((visible) => !visible);
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.mainColor }]}>
       <Text style={[styles.title, { color: theme.textColor }]}>My App</Text>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={toggleAddModal} style={styles.button}>
           <Text style={[styles.buttonText, { color: theme.textColor }]}>
             Add
           </Text>
@@ -18,6 +25,7 @@ const Header = () => {
           </Text>
         </TouchableOpacity>
       </View>
+      <AddModal visible={isAddVisible} toggleModal={toggleAddModal} />
     </View>
   );
 };

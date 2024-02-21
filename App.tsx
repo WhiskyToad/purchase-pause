@@ -1,4 +1,4 @@
-import Header from "@/components/Header/Header";
+import Header from "@/components/layout/Header";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import ListScreen from "@/screens/ListScreen";
 
