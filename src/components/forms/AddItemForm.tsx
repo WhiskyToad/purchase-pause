@@ -10,6 +10,7 @@ import {
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
 import { addItemToDb } from "@/database/api";
+import CustomButton from "../ui/CustomButton";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -104,19 +105,16 @@ const AddItemForm = (props: AddItemFormProps) => {
         defaultValue=""
       />
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          style={styles.button}
+        <CustomButton
           onPress={handleSubmit(onSubmit)}
-        >
-          <Text style={[styles.closeButtonText, { color: theme.accentColor }]}>
-            Submit
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={props.toggleModal}>
-          <Text style={[styles.closeButtonText, { color: theme.accentColor }]}>
-            Close
-          </Text>
-        </TouchableOpacity>
+          variant={"primary"}
+          text={"Submit"}
+        />
+        <CustomButton
+          onPress={props.toggleModal}
+          variant={"secondary"}
+          text={"Cancel"}
+        />
       </View>
     </View>
   );

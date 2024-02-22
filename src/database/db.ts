@@ -10,8 +10,12 @@ export const startDb = () =>
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         itemName TEXT NOT NULL,
         description TEXT,
-        cost REAL NOT NULL,
-        duration INTEGER NOT NULL
+        cost INTEGER NOT NULL,
+        duration INTEGER NOT NULL,
+        createdAt TEXT NOT NULL,
+        completedAt TEXT,
+        status TEXT CHECK (status IN ('purchased', 'not_purchased')),
+        durationLeft INTEGER NOT NULL
       );`,
       [],
       () => {
