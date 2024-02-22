@@ -1,3 +1,4 @@
+import AddItemForm from "@/components/forms/AddItemForm";
 import { useTheme } from "@/contexts/ThemeContext";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
@@ -20,19 +21,7 @@ const AddModal = (props: AddModalProps) => {
         <View
           style={[styles.modalContent, { backgroundColor: theme.mainColor }]}
         >
-          <Text style={[styles.modalText, { color: theme.textColor }]}>
-            This is a modal
-          </Text>
-          <TouchableOpacity
-            style={styles.closeButton}
-            onPress={props.toggleModal}
-          >
-            <Text
-              style={[styles.closeButtonText, { color: theme.accentColor }]}
-            >
-              Close
-            </Text>
-          </TouchableOpacity>
+          <AddItemForm toggleModal={props.toggleModal} />
         </View>
       </View>
     </Modal>
@@ -49,16 +38,6 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 10,
     elevation: 5,
-  },
-  modalText: {
-    fontSize: 16,
-  },
-  closeButton: {
-    marginTop: 10,
-    alignSelf: "flex-end",
-  },
-  closeButtonText: {
-    fontSize: 16,
   },
 });
 
