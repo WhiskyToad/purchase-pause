@@ -22,12 +22,14 @@ export type AddItemFormData = {
   duration: string;
 };
 const AddItemForm = (props: AddItemFormProps) => {
-  const { control, handleSubmit } = useForm<AddItemFormData>();
+  const { control, handleSubmit, reset } = useForm<AddItemFormData>();
   const { theme } = useTheme();
 
   const onSubmit = async (data: AddItemFormData) => {
     const dbInsert = await addItemToDb(data);
-    console.log(dbInsert, "db insert");
+    if (dbInsert) {
+      reset();
+    }
   };
 
   return (
