@@ -9,17 +9,25 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
+import { addItemToDb } from "@/database/api";
 
 type AddItemFormProps = {
   toggleModal: () => void;
 };
+
+export type AddItemFormData = {
+  itemName: string;
+  description: string;
+  cost: string;
+  duration: string;
+};
 const AddItemForm = (props: AddItemFormProps) => {
-  const { control, handleSubmit } = useForm();
+  const { control, handleSubmit } = useForm<AddItemFormData>();
   const { theme } = useTheme();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    // Here you can handle submission, such as adding the item to the purchase list
+  const onSubmit = async (data: AddItemFormData) => {
+    const dbInsert = await addItemToDb(data);
+    console.log(dbInsert, "db insert");
   };
 
   return (
