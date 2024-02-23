@@ -9,7 +9,7 @@ import { SafeAreaView, StyleSheet } from "react-native";
 import useFetchItemsWithNullStatus from "@/hooks/useFetchItemsWithNullStatus";
 
 export default function App() {
-  const { fetchData } = useFetchItemsWithNullStatus();
+  const { fetchData, items } = useFetchItemsWithNullStatus();
 
   useEffect(() => {
     startDb()
@@ -25,7 +25,7 @@ export default function App() {
     <ThemeProvider>
       <SafeAreaView style={styles.container}>
         <Header fetchData={fetchData} />
-        <ListScreen />
+        <ListScreen items={items} />
       </SafeAreaView>
     </ThemeProvider>
   );
