@@ -14,6 +14,7 @@ import useAddItemToDb from "@/hooks/useAddItemToDb";
 
 type AddItemFormProps = {
   toggleModal: () => void;
+  fetchData: () => void;
 };
 
 export type AddItemFormData = {
@@ -30,6 +31,7 @@ const AddItemForm = (props: AddItemFormProps) => {
   const onSubmit = async (data: AddItemFormData) => {
     const dbInsert = await addItemToDb(data);
     if (dbInsert) {
+      props.fetchData();
       reset();
     }
   };

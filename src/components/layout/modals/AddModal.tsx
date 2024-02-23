@@ -1,10 +1,11 @@
 import AddItemForm from "@/components/forms/AddItemForm";
 import { useTheme } from "@/contexts/ThemeContext";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Modal, StyleSheet, View } from "react-native";
 
 type AddModalProps = {
   visible: boolean;
   toggleModal: () => void;
+  fetchData: () => void;
 };
 
 const AddModal = (props: AddModalProps) => {
@@ -21,7 +22,10 @@ const AddModal = (props: AddModalProps) => {
         <View
           style={[styles.modalContent, { backgroundColor: theme.mainColor }]}
         >
-          <AddItemForm toggleModal={props.toggleModal} />
+          <AddItemForm
+            toggleModal={props.toggleModal}
+            fetchData={props.fetchData}
+          />
         </View>
       </View>
     </Modal>

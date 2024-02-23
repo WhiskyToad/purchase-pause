@@ -6,20 +6,25 @@ import { useEffect, useState } from "react";
 
 import { SafeAreaView, StyleSheet } from "react-native";
 
+import useFetchItemsWithNullStatus from "@/hooks/useFetchItemsWithNullStatus";
+
 export default function App() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { fetchData } = useFetchItemsWithNullStatus();
 
   useEffect(() => {
-    startDb().then(() => {
-      setIsLoading(false); // Set isLoading to false when startDb finishes
-    });
-  }, []);
+    startDb()
+      .then(() => {
+        fetchData(); // Fetch data only after the database has been initialized
+      })
+      .catch((error) => {
+        console.error("Error starting database:", error);
+      });
+  }, [startDb]);
 
-  if (isLoading) return null;
   return (
     <ThemeProvider>
       <SafeAreaView style={styles.container}>
-        <Header />
+        <Header fetchData={fetchData} />
         <ListScreen />
       </SafeAreaView>
     </ThemeProvider>

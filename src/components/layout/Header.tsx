@@ -2,7 +2,11 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AddModal from "./modals/AddModal";
-const Header = () => {
+
+type HeaderProps = {
+  fetchData: () => void;
+};
+const Header = (props: HeaderProps) => {
   const { theme } = useTheme();
   const [isAddVisible, setIsAddVisible] = useState(false);
 
@@ -25,7 +29,11 @@ const Header = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      <AddModal visible={isAddVisible} toggleModal={toggleAddModal} />
+      <AddModal
+        visible={isAddVisible}
+        toggleModal={toggleAddModal}
+        fetchData={props.fetchData}
+      />
     </View>
   );
 };
