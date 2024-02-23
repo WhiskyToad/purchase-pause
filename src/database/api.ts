@@ -23,26 +23,5 @@ export const addItemToDb = (data: AddItemFormData) => {
     })
 }
 
-export const fetchItemsWithNullStatus = (): Promise<any[]> => {
-    return new Promise((resolve, reject) => {
-      db.transaction(tx => {
-        tx.executeSql(
-          `SELECT * FROM PurchaseItem WHERE status IS NULL`,
-          [],
-          (_, resultSet) => {
-            const items: any[] = [];
-            for (let i = 0; i < resultSet.rows.length; i++) {
-              items.push(resultSet.rows.item(i));
-            }
-            resolve(items);
-          },
-          (_, error) => {
-            reject(error);
-            return false;
-          }
-        );
-      });
-    });
-  };
-  
+
   
