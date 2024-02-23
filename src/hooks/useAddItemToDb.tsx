@@ -12,13 +12,17 @@ const useAddItemToDb = () => {
       await new Promise<void>((resolve, reject) => {
         db.transaction((tx) => {
           tx.executeSql(
-            `INSERT INTO PurchaseItem (itemName, description, cost, duration, durationLeft) VALUES (?, ?, ?, ?, ?)`,
+            `INSERT INTO PurchaseItem (itemName, description, cost, duration, createdAt, completedAt, status) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            `,
             [
               data.itemName,
               data.description,
               data.cost,
               data.duration,
-              data.duration,
+              new Date().toISOString(),
+              null,
+              null,
             ],
             (_, resultSet) => {
               console.log("Item added successfully");

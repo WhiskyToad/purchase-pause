@@ -16,8 +16,7 @@ export const startDb = (): Promise<void> => {
               duration INTEGER NOT NULL,
               createdAt TEXT NOT NULL,
               completedAt TEXT,
-              status TEXT CHECK (status IN ('purchased', 'not_purchased')),
-              durationLeft INTEGER NOT NULL
+              status TEXT CHECK (status IN ('purchased', 'not_purchased'))
             );`,
             [],
             () => {
