@@ -9,8 +9,8 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
-import { addItemToDb } from "@/database/api";
 import CustomButton from "../ui/CustomButton";
+import useAddItemToDb from "@/hooks/useAddItemToDb";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -25,6 +25,7 @@ export type AddItemFormData = {
 const AddItemForm = (props: AddItemFormProps) => {
   const { control, handleSubmit, reset } = useForm<AddItemFormData>();
   const { theme } = useTheme();
+  const { addItemToDb } = useAddItemToDb();
 
   const onSubmit = async (data: AddItemFormData) => {
     const dbInsert = await addItemToDb(data);
