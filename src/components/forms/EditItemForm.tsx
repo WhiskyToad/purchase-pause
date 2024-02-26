@@ -5,6 +5,7 @@ import CustomButton from "../ui/CustomButton";
 import CustomTextInput from "../ui/CustomTextInput";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { PurchaseItem } from "@/types/item.types";
+import useEditItemInDb from "@/hooks/useEditItemInDb";
 
 type EditItemFormProps = {
   item: PurchaseItem;
@@ -27,9 +28,10 @@ const EditItemForm = (props: EditItemFormProps) => {
     },
   });
   const { theme } = useTheme();
+  const { editItemInDb } = useEditItemInDb();
 
   const onSubmit = async (data: EditItemFormData) => {
-    console.log(data);
+    editItemInDb(props.item.id, data);
   };
 
   return (
