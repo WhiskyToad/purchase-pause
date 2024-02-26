@@ -17,7 +17,14 @@ const ItemDisplay = (props: ItemDisplayProps) => {
   return (
     <TouchableOpacity
       onPress={() => {}}
-      style={{ padding: 10, backgroundColor: theme.backgroundColor }}
+      style={{
+        padding: 10,
+        backgroundColor: theme.backgroundColor,
+        borderColor: theme.textColor,
+        borderWidth: 2,
+        borderRadius: 4,
+        width: "100%",
+      }}
     >
       <Text style={{ color: theme.textColor, fontSize: 16, marginBottom: 5 }}>
         {props.item.name}
