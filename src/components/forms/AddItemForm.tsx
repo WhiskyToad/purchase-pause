@@ -11,6 +11,7 @@ import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
 import CustomButton from "../ui/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
+import CustomTextInput from "../ui/CustomTextInput";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -42,11 +43,12 @@ const AddItemForm = (props: AddItemFormProps) => {
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={[styles.input, { borderColor: theme.mainColor }]}
+          <CustomTextInput
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChange={onChange}
             value={value}
+            keyboardType={"default"}
+            multiline={false}
           />
         )}
         name="itemName"
@@ -60,11 +62,11 @@ const AddItemForm = (props: AddItemFormProps) => {
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={[styles.input, { borderColor: theme.mainColor }]}
+          <CustomTextInput
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChange={onChange}
             value={value}
+            keyboardType={"default"}
             multiline
           />
         )}
@@ -76,12 +78,12 @@ const AddItemForm = (props: AddItemFormProps) => {
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={[styles.input, { borderColor: theme.mainColor }]}
+          <CustomTextInput
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChange={onChange}
             value={value}
             keyboardType="numeric"
+            multiline={false}
           />
         )}
         name="cost"
@@ -95,12 +97,12 @@ const AddItemForm = (props: AddItemFormProps) => {
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={[styles.input, { borderColor: theme.mainColor }]}
+          <CustomTextInput
             onBlur={onBlur}
-            onChangeText={onChange}
+            onChange={onChange}
             value={value}
             keyboardType="numeric"
+            multiline={false}
           />
         )}
         name="duration"
