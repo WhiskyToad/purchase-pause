@@ -1,5 +1,7 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { useState } from "react";
 import { Text, TouchableOpacity } from "react-native";
+import EditItemModal from "./modals/EditItemModal";
 
 type Item = {
   name: string;
@@ -12,11 +14,12 @@ type ItemDisplayProps = {
 };
 
 const ItemDisplay = (props: ItemDisplayProps) => {
+  const [showEditModal, setShowEditModal] = useState(false);
   const { theme } = useTheme();
 
   return (
     <TouchableOpacity
-      onPress={() => {}}
+      onPress={() => setShowEditModal(true)}
       style={{
         padding: 10,
         backgroundColor: theme.backgroundColor,
@@ -33,6 +36,7 @@ const ItemDisplay = (props: ItemDisplayProps) => {
       <Text style={{ color: theme.textColor }}>
         Days Left: {props.item.daysLeft}
       </Text>
+      <EditItemModal visibile={showEditModal} />
     </TouchableOpacity>
   );
 };
