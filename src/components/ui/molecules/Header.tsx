@@ -1,8 +1,8 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import AddModal from "./modals/AddModal";
-import SettingsModal from "./modals/SettingsModal";
+import AddModal from "../../modals/AddModal";
+import SettingsModal from "../../modals/SettingsModal";
 
 type HeaderProps = {
   screen: "current" | "history";

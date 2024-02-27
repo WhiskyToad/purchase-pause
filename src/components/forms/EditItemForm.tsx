@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import CustomButton from "../ui/CustomButton";
-import CustomTextInput from "../ui/CustomTextInput";
+import CustomButton from "../ui/atoms/CustomButton";
+import CustomTextInput from "../ui/atoms/CustomTextInput";
 import { useTheme } from "@/contexts/ThemeContext";
 import type {
   PurchaseItem,

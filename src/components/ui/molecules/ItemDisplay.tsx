@@ -1,12 +1,12 @@
 import { useTheme } from "@/contexts/ThemeContext";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
-import EditItemModal from "./modals/EditItemModal";
+import EditItemModal from "../../modals/EditItemModal";
 import type {
   PurchaseItem,
   PurchaseItemWithCountdown,
 } from "@/types/item.types";
-import CustomButton from "../ui/CustomButton";
+import CustomButton from "../atoms/CustomButton";
 import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 

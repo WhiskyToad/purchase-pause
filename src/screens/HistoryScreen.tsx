@@ -1,4 +1,4 @@
-import ItemDisplay from "@/components/layout/ItemDisplay";
+import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
 import { useWithStatusItemContext } from "@/contexts/WithStatusItemsContext";
 import { View } from "react-native";
 

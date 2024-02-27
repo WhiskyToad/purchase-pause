@@ -1,4 +1,4 @@
-import Header from "@/components/layout/Header";
+import Header from "@/components/ui/molecules/Header";
 import { NullStatusItemProvider } from "@/contexts/NullStatusItemsContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { WithStatusItemProvider } from "@/contexts/WithStatusItemsContext";

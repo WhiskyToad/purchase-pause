@@ -1,4 +1,4 @@
-import ItemDisplay from "@/components/layout/ItemDisplay";
+import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import type {
   PurchaseItem,

@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { Picker } from "@react-native-picker/picker";
-import CustomTextInput from "../ui/CustomTextInput";
-import CustomButton from "../ui/CustomButton";
+import CustomTextInput from "../ui/atoms/CustomTextInput";
+import CustomButton from "../ui/atoms/CustomButton";
 
 type SettingsFormProps = {
   toggleModal: () => void;

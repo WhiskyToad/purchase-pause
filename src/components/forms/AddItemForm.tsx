@@ -9,9 +9,9 @@ import {
 } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
-import CustomButton from "../ui/CustomButton";
+import CustomButton from "../ui/atoms/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
-import CustomTextInput from "../ui/CustomTextInput";
+import CustomTextInput from "../ui/atoms/CustomTextInput";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type AddItemFormProps = {
