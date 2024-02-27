@@ -28,7 +28,6 @@ const useFetchItemsWithNullStatus = () => {
           });
         }
       );
-      console.log("Items with null status:", fetchedItems);
       setItems(fetchedItems); // Update state with fetched items
     } catch (error) {
       console.error("Error fetching items with null status:", error);

@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import CustomButton from "../ui/CustomButton";
-
 import CustomTextInput from "../ui/CustomTextInput";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { PurchaseItem } from "@/types/item.types";
@@ -20,18 +19,22 @@ export type EditItemFormData = {
 };
 
 const EditItemForm = (props: EditItemFormProps) => {
-  const { control, handleSubmit, reset } = useForm<EditItemFormData>({
+  const { control, handleSubmit } = useForm<EditItemFormData>({
     defaultValues: {
       itemName: props.item.itemName,
       description: props.item.description,
       cost: props.item.cost.toString(),
+      duration: props.item.duration.toString(),
     },
   });
   const { theme } = useTheme();
   const { editItemInDb } = useEditItemInDb();
 
   const onSubmit = async (data: EditItemFormData) => {
-    editItemInDb(props.item.id, data);
+    const editResult = await editItemInDb(props.item.id, data);
+    if (editResult) {
+      props.toggleModal();
+    }
   };
 
   return (
