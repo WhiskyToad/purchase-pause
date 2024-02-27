@@ -1,6 +1,6 @@
-import { View, Text, Modal } from "react-native";
+import { Modal } from "react-native";
 import React from "react";
-import CustomButton from "@/components/ui/CustomButton";
+import SettingsForm from "@/components/forms/SettingsForm";
 
 type SettingsModalProps = {
   visible: boolean;
@@ -10,13 +10,7 @@ type SettingsModalProps = {
 const SettingsModal = (props: SettingsModalProps) => {
   return (
     <Modal visible={props.visible}>
-      <Text>SettingsModal</Text>
-
-      <CustomButton
-        onPress={props.toggleModal}
-        variant={"secondary"}
-        text={"Cancel"}
-      />
+      <SettingsForm toggleModal={props.toggleModal} />
     </Modal>
   );
 };

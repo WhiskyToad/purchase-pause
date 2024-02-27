@@ -10,6 +10,7 @@
     "ts:check": "tsc"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.6.1",
     "expo": "~50.0.7",
     "expo-sqlite": "^13.2.2",
     "expo-status-bar": "~1.11.1",
