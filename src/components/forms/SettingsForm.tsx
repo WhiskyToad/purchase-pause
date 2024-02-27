@@ -1,5 +1,4 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
 import TextFormInput from "./components/TextFormInput";
@@ -19,7 +18,7 @@ const SettingsForm = (props: SettingsFormProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Title>Settings</Title>
 
       <PickerFormInput
@@ -56,21 +55,8 @@ const SettingsForm = (props: SettingsFormProps) => {
         variant={"secondary"}
         text={"Cancel"}
       />
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 5,
-    padding: 10,
-  },
-});
 
 export default SettingsForm;

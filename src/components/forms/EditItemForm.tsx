@@ -1,5 +1,4 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
@@ -54,7 +53,7 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Title>Edit Item</Title>
       <TextFormInput
         control={control}
@@ -97,15 +96,8 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
         text="Remove Item"
       />
       <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-});
 
 export default EditItemForm;

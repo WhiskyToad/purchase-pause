@@ -34,7 +34,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
   };
 
   return (
-    <View style={styles.container}>
+    <>
       <Title>Add Item</Title>
       <TextFormInput
         control={control}
@@ -76,15 +76,8 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         text="Submit"
       />
       <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
-    </View>
+    </>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-});
 
 export default AddItemForm;
