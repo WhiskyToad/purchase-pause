@@ -6,6 +6,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import type { PurchaseItem } from "@/types/item.types";
 import useEditItemInDb from "@/hooks/useEditItemInDb";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
+import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 
 type EditItemFormProps = {
   item: PurchaseItem;
@@ -31,10 +32,19 @@ const EditItemForm = (props: EditItemFormProps) => {
   const { theme } = useTheme();
   const { editItemInDb } = useEditItemInDb();
   const { fetchData } = useNullStatusItemContext();
+  const { updateItemStatus } = useUpdateItemStatus();
 
   const onSubmit = async (data: EditItemFormData) => {
     const editResult = await editItemInDb(props.item.id, data);
     if (editResult) {
+      fetchData();
+      props.toggleModal();
+    }
+  };
+
+  const markAsNotPurchased = async () => {
+    const updateResult = await updateItemStatus(props.item.id, "not_purchased");
+    if (updateResult) {
       fetchData();
       props.toggleModal();
     }
@@ -119,7 +129,7 @@ const EditItemForm = (props: EditItemFormProps) => {
           text="Submit"
         />
         <CustomButton
-          onPress={() => {}}
+          onPress={markAsNotPurchased}
           variant="secondary"
           text="Remove Item"
         />
