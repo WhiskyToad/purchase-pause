@@ -4,6 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import EditItemModal from "./modals/EditItemModal";
 import type { PurchaseItem } from "@/types/item.types";
 import CustomButton from "../ui/CustomButton";
+import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
+import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type ItemDisplayProps = {
   item: PurchaseItem;
@@ -12,9 +14,19 @@ type ItemDisplayProps = {
 const ItemDisplay = (props: ItemDisplayProps) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const { theme } = useTheme();
+  const { updateItemStatus } = useUpdateItemStatus();
+  const { fetchData } = useNullStatusItemContext();
 
   const toggleModal = () => {
     setShowEditModal(!showEditModal);
+  };
+
+  const markAsPurchased = async () => {
+    //TODO - have a date picker for this?
+    const updateResult = await updateItemStatus(props.item.id, "purchased");
+    if (updateResult) {
+      fetchData();
+    }
   };
 
   return (
@@ -34,7 +46,11 @@ const ItemDisplay = (props: ItemDisplayProps) => {
       <Text style={{ color: theme.textColor }}>Days Left: {1}</Text>
 
       <CustomButton onPress={toggleModal} variant="primary" text="Edit" />
-      <CustomButton onPress={() => {}} variant="secondary" text="Purchased" />
+      <CustomButton
+        onPress={markAsPurchased}
+        variant="secondary"
+        text="Purchased"
+      />
 
       {showEditModal && (
         <EditItemModal

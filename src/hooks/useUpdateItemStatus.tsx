@@ -15,10 +15,10 @@ const useUpdateItemStatus = () => {
         db.transaction((tx) => {
           tx.executeSql(
             `UPDATE PurchaseItem 
-            SET status = ? 
+            SET status = ?, completedAt = ? 
             WHERE id = ?
             `,
-            [newStatus, itemId],
+            [newStatus, new Date().toISOString(), itemId],
             (_, resultSet) => {
               console.log("Item status updated successfully");
               setIsLoading(false);
