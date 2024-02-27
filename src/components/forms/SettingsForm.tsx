@@ -26,14 +26,13 @@ const SettingsForm = (props: SettingsFormProps) => {
           control={control}
           render={({ field }) => (
             <Picker selectedValue={field.value} onValueChange={field.onChange}>
-              <Picker.Item label="USD" value="USD" />
-              <Picker.Item label="EUR" value="EUR" />
-              <Picker.Item label="GBP" value="GBP" />
-              {/* Add more currency options as needed */}
+              <Picker.Item label="$" value="$" />
+              <Picker.Item label="€" value="€" />
+              <Picker.Item label="£" value="£" />
             </Picker>
           )}
           name="defaultCurrency"
-          defaultValue="USD"
+          defaultValue="$"
         />
       </View>
 
