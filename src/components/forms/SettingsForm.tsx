@@ -5,6 +5,7 @@ import { Picker } from "@react-native-picker/picker";
 import CustomButton from "../ui/atoms/CustomButton";
 import TextFormInput from "./components/TextFormInput";
 import PickerFormInput from "./components/PickerFormInput";
+import SwitchFormInput from "./components/SwitchFormInput";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -21,18 +22,16 @@ const SettingsForm = (props: SettingsFormProps) => {
     <View style={styles.container}>
       <Text style={styles.header}>Settings</Text>
 
-      <View style={styles.section}>
-        <PickerFormInput
-          control={control}
-          name={"defaultCurrency"}
-          label={"Default Currency"}
-          options={[
-            { label: "$", value: "$" },
-            { label: "€", value: "€" },
-            { label: "£", value: "£" },
-          ]}
-        />
-      </View>
+      <PickerFormInput
+        control={control}
+        name={"defaultCurrency"}
+        label={"Default Currency"}
+        options={[
+          { label: "$", value: "$" },
+          { label: "€", value: "€" },
+          { label: "£", value: "£" },
+        ]}
+      />
 
       <TextFormInput
         keyboardType="numeric"
@@ -41,19 +40,11 @@ const SettingsForm = (props: SettingsFormProps) => {
         name="defaultWaitPeriod"
         defaultValue="7"
       />
-
-      <View style={styles.section}>
-        <Text style={styles.sectionHeader}>Notification Settings</Text>
-        <Controller
-          control={control}
-          render={({ field }) => (
-            <Switch value={field.value} onValueChange={field.onChange} />
-          )}
-          name="notificationsEnabled"
-          defaultValue={true}
-        />
-        <Text>Enable Notifications</Text>
-      </View>
+      <SwitchFormInput
+        control={control}
+        name={"notificationsEnabled"}
+        label={"Enable Notifications"}
+      />
 
       <CustomButton
         onPress={handleSubmit(onSubmit)}
@@ -78,13 +69,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginBottom: 20,
-  },
-  section: {
-    marginBottom: 20,
-  },
-  sectionHeader: {
-    fontSize: 18,
-    marginBottom: 10,
   },
   input: {
     borderWidth: 1,
