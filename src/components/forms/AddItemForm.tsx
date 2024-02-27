@@ -6,6 +6,7 @@ import CustomButton from "../ui/atoms/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import TextFormInput from "./components/TextFormInput";
+import Title from "../ui/atoms/Title";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -34,6 +35,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
 
   return (
     <View style={styles.container}>
+      <Title>Add Item</Title>
       <TextFormInput
         control={control}
         name="itemName"

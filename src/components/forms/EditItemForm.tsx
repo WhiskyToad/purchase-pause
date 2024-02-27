@@ -10,6 +10,7 @@ import type {
   PurchaseItemWithCountdown,
 } from "@/types/item.types";
 import TextFormInput from "./components/TextFormInput";
+import Title from "../ui/atoms/Title";
 
 type EditItemFormProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -54,6 +55,7 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
 
   return (
     <View style={styles.container}>
+      <Title>Edit Item</Title>
       <TextFormInput
         control={control}
         name="itemName"

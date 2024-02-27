@@ -1,11 +1,11 @@
 import React from "react";
-import { View, Text, StyleSheet, Switch } from "react-native";
-import { useForm, Controller } from "react-hook-form";
-import { Picker } from "@react-native-picker/picker";
+import { View, StyleSheet } from "react-native";
+import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
 import TextFormInput from "./components/TextFormInput";
 import PickerFormInput from "./components/PickerFormInput";
 import SwitchFormInput from "./components/SwitchFormInput";
+import Title from "../ui/atoms/Title";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -20,7 +20,7 @@ const SettingsForm = (props: SettingsFormProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Settings</Text>
+      <Title>Settings</Title>
 
       <PickerFormInput
         control={control}
@@ -64,11 +64,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-  },
-  header: {
-    fontSize: 24,
-    fontWeight: "bold",
-    marginBottom: 20,
   },
   input: {
     borderWidth: 1,
