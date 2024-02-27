@@ -2,13 +2,16 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import EditItemModal from "./modals/EditItemModal";
-import type { PurchaseItemWithCountdown } from "@/types/item.types";
+import type {
+  PurchaseItem,
+  PurchaseItemWithCountdown,
+} from "@/types/item.types";
 import CustomButton from "../ui/CustomButton";
 import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type ItemDisplayProps = {
-  item: PurchaseItemWithCountdown;
+  item: PurchaseItem | PurchaseItemWithCountdown;
   isHistory?: boolean;
 };
 
@@ -44,12 +47,14 @@ const ItemDisplay = (props: ItemDisplayProps) => {
         {props.item.itemName}
       </Text>
       <Text style={{ color: theme.textColor }}>Cost: {props.item.cost}</Text>
+      {"daysLeft" in props.item && (
+        <Text style={{ color: theme.textColor }}>
+          Days Left: {props.item.daysLeft}
+        </Text>
+      )}
+
       {!Boolean(props.isHistory) && (
         <>
-          <Text style={{ color: theme.textColor }}>
-            Days Left: {props.item.daysLeft}
-          </Text>
-
           <CustomButton onPress={toggleModal} variant="primary" text="Edit" />
           <CustomButton
             onPress={markAsPurchased}
