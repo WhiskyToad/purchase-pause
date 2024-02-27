@@ -2,6 +2,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AddModal from "./modals/AddModal";
+import SettingsModal from "./modals/SettingsModal";
 
 type HeaderProps = {
   screen: "current" | "history";
@@ -10,9 +11,14 @@ type HeaderProps = {
 const Header = (props: HeaderProps) => {
   const { theme } = useTheme();
   const [isAddVisible, setIsAddVisible] = useState(false);
+  const [isSettingsVisible, setIsSettingsVisible] = useState(false);
 
   const toggleAddModal = () => {
     setIsAddVisible((visible) => !visible);
+  };
+
+  const toggleSettingModal = () => {
+    setIsSettingsVisible(!isSettingsVisible);
   };
 
   const toggleScreen = () => {
@@ -33,13 +39,17 @@ const Header = (props: HeaderProps) => {
             Add
           </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity onPress={toggleSettingModal} style={styles.button}>
           <Text style={[styles.buttonText, { color: theme.textColor }]}>
             Settings
           </Text>
         </TouchableOpacity>
       </View>
       <AddModal visible={isAddVisible} toggleModal={toggleAddModal} />
+      <SettingsModal
+        visible={isSettingsVisible}
+        toggleModal={toggleSettingModal}
+      />
     </View>
   );
 };
