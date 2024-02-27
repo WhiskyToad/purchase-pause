@@ -24,7 +24,14 @@ const ListScreen = () => {
   }, [items]);
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View
+      style={{
+        flex: 1,
+        paddingTop: 12,
+        justifyContent: "flex-start",
+        alignItems: "flex-start",
+      }}
+    >
       {itemsSortedWithCountdown.map((item) => {
         return <ItemDisplay key={item.id} item={item} />;
       })}

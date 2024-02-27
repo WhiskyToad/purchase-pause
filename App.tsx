@@ -1,6 +1,6 @@
 import Header from "@/components/ui/molecules/Header";
 import { NullStatusItemProvider } from "@/contexts/NullStatusItemsContext";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { WithStatusItemProvider } from "@/contexts/WithStatusItemsContext";
 import { startDb } from "@/database/db";
 import HistoryScreen from "@/screens/HistoryScreen";
@@ -12,7 +12,7 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [screen, setScreen] = useState<"current" | "history">("current");
-
+  const { theme } = useTheme();
   useEffect(() => {
     startDb()
       .then(() => {
@@ -28,7 +28,12 @@ export default function App() {
       <NullStatusItemProvider>
         <WithStatusItemProvider>
           {!isLoading && (
-            <SafeAreaView style={styles.container}>
+            <SafeAreaView
+              style={[
+                styles.container,
+                { backgroundColor: theme.mainColorLighter },
+              ]}
+            >
               <Header screen={screen} setScreen={setScreen} />
               <View style={styles.contentContainer}>
                 {screen === "current" && <ListScreen />}
