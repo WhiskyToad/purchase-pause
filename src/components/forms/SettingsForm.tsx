@@ -4,6 +4,7 @@ import { useForm, Controller } from "react-hook-form";
 import { Picker } from "@react-native-picker/picker";
 import CustomButton from "../ui/atoms/CustomButton";
 import TextFormInput from "./components/TextFormInput";
+import PickerFormInput from "./components/PickerFormInput";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -21,18 +22,15 @@ const SettingsForm = (props: SettingsFormProps) => {
       <Text style={styles.header}>Settings</Text>
 
       <View style={styles.section}>
-        <Text style={styles.sectionHeader}>Default Currency</Text>
-        <Controller
+        <PickerFormInput
           control={control}
-          render={({ field }) => (
-            <Picker selectedValue={field.value} onValueChange={field.onChange}>
-              <Picker.Item label="$" value="$" />
-              <Picker.Item label="€" value="€" />
-              <Picker.Item label="£" value="£" />
-            </Picker>
-          )}
-          name="defaultCurrency"
-          defaultValue="$"
+          name={"defaultCurrency"}
+          label={"Default Currency"}
+          options={[
+            { label: "$", value: "$" },
+            { label: "€", value: "€" },
+            { label: "£", value: "£" },
+          ]}
         />
       </View>
 
