@@ -86,19 +86,17 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
         keyboardType="numeric"
       />
 
-      <View style={styles.buttonsContainer}>
-        <CustomButton
-          onPress={handleSubmit(onSubmit)}
-          variant="primary"
-          text="Submit"
-        />
-        <CustomButton
-          onPress={markAsNotPurchased}
-          variant="secondary"
-          text="Remove Item"
-        />
-        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
-      </View>
+      <CustomButton
+        onPress={handleSubmit(onSubmit)}
+        variant="primary"
+        text="Submit"
+      />
+      <CustomButton
+        onPress={markAsNotPurchased}
+        variant="secondary"
+        text="Remove Item"
+      />
+      <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
     </View>
   );
 };
@@ -107,9 +105,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 20,
-  },
-  buttonsContainer: {
-    alignItems: "center",
   },
 });
 

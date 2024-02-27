@@ -70,14 +70,12 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         keyboardType="numeric"
       />
 
-      <View style={styles.buttonsContainer}>
-        <CustomButton
-          onPress={handleSubmit(onSubmit)}
-          variant="primary"
-          text="Submit"
-        />
-        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
-      </View>
+      <CustomButton
+        onPress={handleSubmit(onSubmit)}
+        variant="primary"
+        text="Submit"
+      />
+      <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
     </View>
   );
 };
@@ -86,9 +84,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 20,
-  },
-  buttonsContainer: {
-    alignItems: "center",
   },
 });
 
