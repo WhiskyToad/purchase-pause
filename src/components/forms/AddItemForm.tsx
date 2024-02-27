@@ -1,30 +1,24 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import { View, StyleSheet } from "react-native";
+import { useForm } from "react-hook-form";
 import { useTheme } from "@/contexts/ThemeContext";
 import CustomButton from "../ui/atoms/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
-import CustomTextInput from "../ui/atoms/CustomTextInput";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
+import TextFormInput from "./components/TextFormInput";
 
 type AddItemFormProps = {
   toggleModal: () => void;
 };
 
-export type AddItemFormData = {
+type AddItemFormData = {
   itemName: string;
   description: string;
   cost: string;
   duration: string;
 };
-const AddItemForm = (props: AddItemFormProps) => {
+
+const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
   const { control, handleSubmit, reset } = useForm<AddItemFormData>();
   const { theme } = useTheme();
   const { addItemToDb } = useAddItemToDb();
@@ -40,82 +34,47 @@ const AddItemForm = (props: AddItemFormProps) => {
 
   return (
     <View style={styles.container}>
-      <Controller
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType={"default"}
-            multiline={false}
-            label={"Item Name"}
-          />
-        )}
         name="itemName"
+        label="Item Name"
         rules={{ required: true }}
         defaultValue=""
       />
 
-      <Controller
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType={"default"}
-            multiline
-            label={"Description"}
-          />
-        )}
         name="description"
+        label="Description"
         defaultValue=""
+        multiline
       />
 
-      <Controller
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType="numeric"
-            multiline={false}
-            label={"Cost"}
-          />
-        )}
         name="cost"
+        label="Cost"
         rules={{ required: true }}
         defaultValue=""
+        keyboardType="numeric"
       />
-      <Controller
+
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType="numeric"
-            multiline={false}
-            label={"Duration (in days)"}
-          />
-        )}
         name="duration"
+        label="Duration (in days)"
         rules={{ required: true }}
         defaultValue=""
+        keyboardType="numeric"
       />
+
       <View style={styles.buttonsContainer}>
         <CustomButton
           onPress={handleSubmit(onSubmit)}
-          variant={"primary"}
-          text={"Submit"}
+          variant="primary"
+          text="Submit"
         />
-        <CustomButton
-          onPress={props.toggleModal}
-          variant={"secondary"}
-          text={"Cancel"}
-        />
+        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
       </View>
     </View>
   );

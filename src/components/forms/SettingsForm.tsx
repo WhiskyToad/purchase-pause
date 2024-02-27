@@ -2,8 +2,8 @@ import React from "react";
 import { View, Text, StyleSheet, Switch } from "react-native";
 import { useForm, Controller } from "react-hook-form";
 import { Picker } from "@react-native-picker/picker";
-import CustomTextInput from "../ui/atoms/CustomTextInput";
 import CustomButton from "../ui/atoms/CustomButton";
+import TextFormInput from "./components/TextFormInput";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -36,23 +36,13 @@ const SettingsForm = (props: SettingsFormProps) => {
         />
       </View>
 
-      <View style={styles.section}>
-        <Controller
-          control={control}
-          render={({ field }) => (
-            <CustomTextInput
-              value={field.value}
-              onChange={field.onChange}
-              keyboardType="numeric"
-              onBlur={field.onChange}
-              multiline={false}
-              label={"Default Wait Period (Days)"}
-            />
-          )}
-          name="defaultWaitPeriod"
-          defaultValue="7"
-        />
-      </View>
+      <TextFormInput
+        keyboardType="numeric"
+        control={control}
+        label={"Default Wait Period (Days)"}
+        name="defaultWaitPeriod"
+        defaultValue="7"
+      />
 
       <View style={styles.section}>
         <Text style={styles.sectionHeader}>Notification Settings</Text>

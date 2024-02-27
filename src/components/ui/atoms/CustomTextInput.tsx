@@ -1,11 +1,16 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import { StyleSheet, Text, TextInput } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  type KeyboardTypeOptions,
+} from "react-native";
 
 type CustomTextInputProps = {
   onBlur: () => void;
   onChange: () => void;
   value: string;
-  keyboardType: "numeric" | "default";
+  keyboardType: KeyboardTypeOptions;
   multiline: boolean;
   label: string;
 };

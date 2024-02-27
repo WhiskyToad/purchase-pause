@@ -1,122 +1,87 @@
-import { View, Text, StyleSheet } from "react-native";
-import { useForm, Controller } from "react-hook-form";
+import React from "react";
+import { View, StyleSheet } from "react-native";
+import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
-import CustomTextInput from "../ui/atoms/CustomTextInput";
-import { useTheme } from "@/contexts/ThemeContext";
+import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
+import useEditItemInDb from "@/hooks/useEditItemInDb";
+import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import type {
   PurchaseItem,
   PurchaseItemWithCountdown,
 } from "@/types/item.types";
-import useEditItemInDb from "@/hooks/useEditItemInDb";
-import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
-import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
+import TextFormInput from "./components/TextFormInput";
 
 type EditItemFormProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
   toggleModal: () => void;
 };
 
-export type EditItemFormData = {
+type EditItemFormData = {
   itemName: string;
   description: string;
   cost: string;
   duration: string;
 };
 
-const EditItemForm = (props: EditItemFormProps) => {
+const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
   const { control, handleSubmit } = useForm<EditItemFormData>({
     defaultValues: {
-      itemName: props.item.itemName,
-      description: props.item.description,
-      cost: props.item.cost.toString(),
-      duration: props.item.duration.toString(),
+      itemName: item.itemName,
+      description: item.description ?? "",
+      cost: item.cost.toString(),
+      duration: item.duration.toString(),
     },
   });
-  const { theme } = useTheme();
-  const { editItemInDb } = useEditItemInDb();
   const { fetchData } = useNullStatusItemContext();
+  const { editItemInDb } = useEditItemInDb();
   const { updateItemStatus } = useUpdateItemStatus();
 
   const onSubmit = async (data: EditItemFormData) => {
-    const editResult = await editItemInDb(props.item.id, data);
+    const editResult = await editItemInDb(item.id, data);
     if (editResult) {
       fetchData();
-      props.toggleModal();
+      toggleModal();
     }
   };
 
   const markAsNotPurchased = async () => {
-    const updateResult = await updateItemStatus(props.item.id, "not_purchased");
+    const updateResult = await updateItemStatus(item.id, "not_purchased");
     if (updateResult) {
       fetchData();
-      props.toggleModal();
+      toggleModal();
     }
   };
 
   return (
     <View style={styles.container}>
-      <Controller
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType="default"
-            multiline={false}
-            label={"Item Name"}
-          />
-        )}
         name="itemName"
+        label="Item Name"
         rules={{ required: true }}
-      />
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType={"default"}
-            multiline
-            label={"Description"}
-          />
-        )}
-        name="description"
-        defaultValue=""
-      />
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType="numeric"
-            multiline={false}
-            label={"Cost"}
-          />
-        )}
-        name="cost"
-        rules={{ required: true }}
-        defaultValue=""
       />
 
-      <Controller
+      <TextFormInput
         control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <CustomTextInput
-            onBlur={onBlur}
-            onChange={onChange}
-            value={value}
-            keyboardType="numeric"
-            multiline={false}
-            label={"Duration (in days)"}
-          />
-        )}
-        name="duration"
+        name="description"
+        label="Description"
+        multiline
+      />
+
+      <TextFormInput
+        control={control}
+        name="cost"
+        label="Cost"
         rules={{ required: true }}
-        defaultValue=""
+        keyboardType="numeric"
+      />
+
+      <TextFormInput
+        control={control}
+        name="duration"
+        label="Duration (in days)"
+        rules={{ required: true }}
+        keyboardType="numeric"
       />
 
       <View style={styles.buttonsContainer}>
@@ -130,11 +95,7 @@ const EditItemForm = (props: EditItemFormProps) => {
           variant="secondary"
           text="Remove Item"
         />
-        <CustomButton
-          onPress={props.toggleModal}
-          variant="secondary"
-          text="Cancel"
-        />
+        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
       </View>
     </View>
   );
