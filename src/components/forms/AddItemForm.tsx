@@ -12,10 +12,10 @@ import { useTheme } from "@/contexts/ThemeContext";
 import CustomButton from "../ui/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
 import CustomTextInput from "../ui/CustomTextInput";
+import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type AddItemFormProps = {
   toggleModal: () => void;
-  fetchData: () => void;
 };
 
 export type AddItemFormData = {
@@ -28,11 +28,12 @@ const AddItemForm = (props: AddItemFormProps) => {
   const { control, handleSubmit, reset } = useForm<AddItemFormData>();
   const { theme } = useTheme();
   const { addItemToDb } = useAddItemToDb();
+  const { fetchData } = useNullStatusItemContext();
 
   const onSubmit = async (data: AddItemFormData) => {
     const dbInsert = await addItemToDb(data);
     if (dbInsert) {
-      props.fetchData();
+      fetchData();
       reset();
     }
   };

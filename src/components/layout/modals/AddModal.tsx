@@ -5,7 +5,6 @@ import { Modal, StyleSheet, View } from "react-native";
 type AddModalProps = {
   visible: boolean;
   toggleModal: () => void;
-  fetchData: () => void;
 };
 
 const AddModal = (props: AddModalProps) => {
@@ -22,10 +21,7 @@ const AddModal = (props: AddModalProps) => {
         <View
           style={[styles.modalContent, { backgroundColor: theme.mainColor }]}
         >
-          <AddItemForm
-            toggleModal={props.toggleModal}
-            fetchData={props.fetchData}
-          />
+          <AddItemForm toggleModal={props.toggleModal} />
         </View>
       </View>
     </Modal>

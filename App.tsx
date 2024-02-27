@@ -1,20 +1,19 @@
 import Header from "@/components/layout/Header";
+import { NullStatusItemProvider } from "@/contexts/NullStatusItemsContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import { startDb } from "@/database/db";
 import ListScreen from "@/screens/ListScreen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import { SafeAreaView, StyleSheet, View } from "react-native";
 
-import useFetchItemsWithNullStatus from "@/hooks/useFetchItemsWithNullStatus";
-
 export default function App() {
-  const { fetchData, items } = useFetchItemsWithNullStatus();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     startDb()
       .then(() => {
-        fetchData(); // Fetch data only after the database has been initialized
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error starting database:", error);
@@ -23,12 +22,16 @@ export default function App() {
 
   return (
     <ThemeProvider>
-      <SafeAreaView style={styles.container}>
-        <Header fetchData={fetchData} />
-        <View style={styles.contentContainer}>
-          <ListScreen items={items} />
-        </View>
-      </SafeAreaView>
+      <NullStatusItemProvider>
+        {!isLoading && (
+          <SafeAreaView style={styles.container}>
+            <Header />
+            <View style={styles.contentContainer}>
+              <ListScreen />
+            </View>
+          </SafeAreaView>
+        )}
+      </NullStatusItemProvider>
     </ThemeProvider>
   );
 }

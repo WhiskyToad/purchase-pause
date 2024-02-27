@@ -1,8 +1,33 @@
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+  useCallback,
+} from "react";
+import { PurchaseItem } from "@/types/item.types";
 import { db } from "@/database/db";
-import type { PurchaseItem } from "@/types/item.types";
-import { useCallback, useState } from "react";
 
-const useFetchItemsWithNullStatus = () => {
+type NullStatusItemContextType = {
+  items: PurchaseItem[];
+  setItems: (items: PurchaseItem[]) => void;
+  fetchData: () => void;
+};
+
+const NullStatusItemContext = createContext<NullStatusItemContextType>({
+  items: [],
+  setItems: () => {},
+  fetchData: () => {},
+});
+
+export const useNullStatusItemContext = () => useContext(NullStatusItemContext);
+
+type ItemProviderProps = {
+  children: ReactNode;
+};
+
+export const NullStatusItemProvider = ({ children }: ItemProviderProps) => {
   const [items, setItems] = useState<PurchaseItem[]>([]);
 
   const fetchData = useCallback(async () => {
@@ -34,7 +59,15 @@ const useFetchItemsWithNullStatus = () => {
     }
   }, []);
 
-  return { fetchData, items };
-};
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-export default useFetchItemsWithNullStatus;
+  const value: NullStatusItemContextType = { items, setItems, fetchData };
+
+  return (
+    <NullStatusItemContext.Provider value={value}>
+      {children}
+    </NullStatusItemContext.Provider>
+  );
+};
