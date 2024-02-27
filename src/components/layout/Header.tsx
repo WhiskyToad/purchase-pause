@@ -3,7 +3,11 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import AddModal from "./modals/AddModal";
 
-const Header = () => {
+type HeaderProps = {
+  screen: "current" | "history";
+  setScreen: (screen: "current" | "history") => void;
+};
+const Header = (props: HeaderProps) => {
   const { theme } = useTheme();
   const [isAddVisible, setIsAddVisible] = useState(false);
 
@@ -11,10 +15,19 @@ const Header = () => {
     setIsAddVisible((visible) => !visible);
   };
 
+  const toggleScreen = () => {
+    props.setScreen(props.screen === "current" ? `history` : `current`);
+  };
+
   return (
     <View style={[styles.container, { backgroundColor: theme.mainColor }]}>
       <Text style={[styles.title, { color: theme.textColor }]}>My App</Text>
       <View style={styles.buttonContainer}>
+        <TouchableOpacity onPress={toggleScreen} style={styles.button}>
+          <Text style={[styles.buttonText, { color: theme.textColor }]}>
+            {props.screen === "current" ? `Current` : `History`}
+          </Text>
+        </TouchableOpacity>
         <TouchableOpacity onPress={toggleAddModal} style={styles.button}>
           <Text style={[styles.buttonText, { color: theme.textColor }]}>
             Add

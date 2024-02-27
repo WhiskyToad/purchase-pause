@@ -9,6 +9,7 @@ import { SafeAreaView, StyleSheet, View } from "react-native";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
+  const [screen, setScreen] = useState<"current" | "history">("current");
 
   useEffect(() => {
     startDb()
@@ -25,9 +26,9 @@ export default function App() {
       <NullStatusItemProvider>
         {!isLoading && (
           <SafeAreaView style={styles.container}>
-            <Header />
+            <Header screen={screen} setScreen={setScreen} />
             <View style={styles.contentContainer}>
-              <ListScreen />
+              {screen === "current" && <ListScreen />}
             </View>
           </SafeAreaView>
         )}
