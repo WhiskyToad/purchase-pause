@@ -8,6 +8,7 @@ import {
   type Path,
   type PathValue,
 } from "react-hook-form";
+import { labelStyles } from "@/theme/styles";
 
 type PickerFormInputProps<T extends FieldValues> = {
   control: Control<T>;
@@ -28,12 +29,16 @@ const PickerFormInput = <T extends FieldValues>({
 }: PickerFormInputProps<T>) => {
   return (
     <>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={labelStyles.label}>{label}</Text>
       <Controller
         rules={rules}
         control={control}
         render={({ field }) => (
-          <Picker selectedValue={field.value} onValueChange={field.onChange}>
+          <Picker
+            selectedValue={field.value}
+            onValueChange={field.onChange}
+            style={{ backgroundColor: "#FFFFFF" }}
+          >
             {options.map((option) => {
               return <Picker.Item label={option.label} value={option.value} />;
             })}
@@ -47,10 +52,3 @@ const PickerFormInput = <T extends FieldValues>({
 };
 
 export default PickerFormInput;
-
-const styles = StyleSheet.create({
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-});

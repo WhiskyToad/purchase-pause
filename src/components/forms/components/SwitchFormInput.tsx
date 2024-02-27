@@ -7,6 +7,7 @@ import {
   PathValue,
   Control,
 } from "react-hook-form";
+import { labelStyles } from "@/theme/styles";
 
 type SwitchFormInputProps<T extends FieldValues> = {
   control: Control<T>;
@@ -23,7 +24,7 @@ const SwitchFormInput = <T extends FieldValues>({
 }: SwitchFormInputProps<T>) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={labelStyles.label}>{label}</Text>
       <Controller
         control={control}
         render={({ field }) => (
@@ -48,9 +49,5 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     alignItems: "center",
-  },
-  label: {
-    fontSize: 18,
-    marginRight: 10,
   },
 });

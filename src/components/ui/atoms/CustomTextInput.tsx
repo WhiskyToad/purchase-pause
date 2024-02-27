@@ -1,4 +1,5 @@
 import { useTheme } from "@/contexts/ThemeContext";
+import { labelStyles } from "@/theme/styles";
 import {
   StyleSheet,
   Text,
@@ -18,7 +19,7 @@ const CustomTextInput = (props: CustomTextInputProps) => {
   const { theme } = useTheme();
   return (
     <>
-      <Text style={styles.label}>{props.label}</Text>
+      <Text style={labelStyles.label}>{props.label}</Text>
       <TextInput
         style={[styles.input, { borderColor: theme.mainColor }]}
         onBlur={props.onBlur}
@@ -40,9 +41,5 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: "white",
-  },
-  label: {
-    fontSize: 18,
-    marginBottom: 10,
   },
 });
