@@ -1,11 +1,14 @@
 import EditItemForm from "@/components/forms/EditItemForm";
-import type { PurchaseItem } from "@/types/item.types";
+import type {
+  PurchaseItem,
+  PurchaseItemWithCountdown,
+} from "@/types/item.types";
 import { Modal } from "react-native";
 
 type EditItemModalProps = {
   visibile: boolean;
   toggleModal: () => void;
-  item: PurchaseItem;
+  item: PurchaseItem | PurchaseItemWithCountdown;
 };
 
 const EditItemModal = (props: EditItemModalProps) => {

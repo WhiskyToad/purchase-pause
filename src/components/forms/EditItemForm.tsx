@@ -3,13 +3,16 @@ import { useForm, Controller } from "react-hook-form";
 import CustomButton from "../ui/CustomButton";
 import CustomTextInput from "../ui/CustomTextInput";
 import { useTheme } from "@/contexts/ThemeContext";
-import type { PurchaseItem } from "@/types/item.types";
+import type {
+  PurchaseItem,
+  PurchaseItemWithCountdown,
+} from "@/types/item.types";
 import useEditItemInDb from "@/hooks/useEditItemInDb";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 
 type EditItemFormProps = {
-  item: PurchaseItem;
+  item: PurchaseItem | PurchaseItemWithCountdown;
   toggleModal: () => void;
 };
 

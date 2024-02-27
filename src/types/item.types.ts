@@ -8,3 +8,7 @@ export type PurchaseItem = {
     completedAt?: string | null;
     status?: 'purchased' | 'not_purchased' | null;
 }
+
+export type PurchaseItemWithCountdown = PurchaseItem & {
+    daysLeft: number;
+};
