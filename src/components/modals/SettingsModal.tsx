@@ -1,6 +1,6 @@
-import { Modal } from "react-native";
 import React from "react";
 import SettingsForm from "@/components/forms/SettingsForm";
+import BaseModal from "./BaseModal";
 
 type SettingsModalProps = {
   visible: boolean;
@@ -9,9 +9,9 @@ type SettingsModalProps = {
 
 const SettingsModal = (props: SettingsModalProps) => {
   return (
-    <Modal visible={props.visible}>
+    <BaseModal visible={props.visible}>
       <SettingsForm toggleModal={props.toggleModal} />
-    </Modal>
+    </BaseModal>
   );
 };
 

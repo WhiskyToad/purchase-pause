@@ -1,4 +1,4 @@
-import { darkTheme, lightTheme } from "@/components/ui/theme";
+import { darkTheme, lightTheme } from "@/theme/theme";
 import {
   createContext,
   useContext,

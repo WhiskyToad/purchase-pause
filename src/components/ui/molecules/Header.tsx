@@ -45,7 +45,9 @@ const Header = (props: HeaderProps) => {
           </Text>
         </TouchableOpacity>
       </View>
-      <AddModal visible={isAddVisible} toggleModal={toggleAddModal} />
+      {isAddVisible && (
+        <AddModal visible={isAddVisible} toggleModal={toggleAddModal} />
+      )}
       <SettingsModal
         visible={isSettingsVisible}
         toggleModal={toggleSettingModal}
