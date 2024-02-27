@@ -5,6 +5,7 @@ import CustomTextInput from "../ui/CustomTextInput";
 import { useTheme } from "@/contexts/ThemeContext";
 import type { PurchaseItem } from "@/types/item.types";
 import useEditItemInDb from "@/hooks/useEditItemInDb";
+import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type EditItemFormProps = {
   item: PurchaseItem;
@@ -29,10 +30,12 @@ const EditItemForm = (props: EditItemFormProps) => {
   });
   const { theme } = useTheme();
   const { editItemInDb } = useEditItemInDb();
+  const { fetchData } = useNullStatusItemContext();
 
   const onSubmit = async (data: EditItemFormData) => {
     const editResult = await editItemInDb(props.item.id, data);
     if (editResult) {
+      fetchData();
       props.toggleModal();
     }
   };
