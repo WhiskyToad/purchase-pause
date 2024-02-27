@@ -9,6 +9,7 @@ import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 
 type ItemDisplayProps = {
   item: PurchaseItem;
+  isHistory?: boolean;
 };
 
 const ItemDisplay = (props: ItemDisplayProps) => {
@@ -45,12 +46,16 @@ const ItemDisplay = (props: ItemDisplayProps) => {
       <Text style={{ color: theme.textColor }}>Cost: {props.item.cost}</Text>
       <Text style={{ color: theme.textColor }}>Days Left: {1}</Text>
 
-      <CustomButton onPress={toggleModal} variant="primary" text="Edit" />
-      <CustomButton
-        onPress={markAsPurchased}
-        variant="secondary"
-        text="Purchased"
-      />
+      {!Boolean(props.isHistory) && (
+        <>
+          <CustomButton onPress={toggleModal} variant="primary" text="Edit" />
+          <CustomButton
+            onPress={markAsPurchased}
+            variant="secondary"
+            text="Purchased"
+          />
+        </>
+      )}
 
       {showEditModal && (
         <EditItemModal

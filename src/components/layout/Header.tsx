@@ -25,7 +25,7 @@ const Header = (props: HeaderProps) => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity onPress={toggleScreen} style={styles.button}>
           <Text style={[styles.buttonText, { color: theme.textColor }]}>
-            {props.screen === "current" ? `Current` : `History`}
+            {props.screen === "current" ? `History` : `Current`}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleAddModal} style={styles.button}>
