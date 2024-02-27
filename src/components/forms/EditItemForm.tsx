@@ -55,7 +55,6 @@ const EditItemForm = (props: EditItemFormProps) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.label}>Item Name</Text>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -65,15 +64,12 @@ const EditItemForm = (props: EditItemFormProps) => {
             value={value}
             keyboardType="default"
             multiline={false}
+            label={"Item Name"}
           />
         )}
         name="itemName"
         rules={{ required: true }}
       />
-
-      <Text style={[styles.label, { color: theme.textColor }]}>
-        Description
-      </Text>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -83,13 +79,12 @@ const EditItemForm = (props: EditItemFormProps) => {
             value={value}
             keyboardType={"default"}
             multiline
+            label={"Description"}
           />
         )}
         name="description"
         defaultValue=""
       />
-
-      <Text style={[styles.label, { color: theme.textColor }]}>Cost</Text>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -99,6 +94,7 @@ const EditItemForm = (props: EditItemFormProps) => {
             value={value}
             keyboardType="numeric"
             multiline={false}
+            label={"Cost"}
           />
         )}
         name="cost"
@@ -106,9 +102,6 @@ const EditItemForm = (props: EditItemFormProps) => {
         defaultValue=""
       />
 
-      <Text style={[styles.label, { color: theme.textColor }]}>
-        Duration (in days)
-      </Text>
       <Controller
         control={control}
         render={({ field: { onChange, onBlur, value } }) => (
@@ -118,6 +111,7 @@ const EditItemForm = (props: EditItemFormProps) => {
             value={value}
             keyboardType="numeric"
             multiline={false}
+            label={"Duration (in days)"}
           />
         )}
         name="duration"
@@ -150,10 +144,6 @@ const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 20,
     paddingTop: 20,
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 5,
   },
   buttonsContainer: {
     alignItems: "center",

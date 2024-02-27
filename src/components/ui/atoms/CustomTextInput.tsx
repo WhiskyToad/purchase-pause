@@ -1,5 +1,5 @@
 import { useTheme } from "@/contexts/ThemeContext";
-import { StyleSheet, TextInput } from "react-native";
+import { StyleSheet, Text, TextInput } from "react-native";
 
 type CustomTextInputProps = {
   onBlur: () => void;
@@ -7,18 +7,22 @@ type CustomTextInputProps = {
   value: string;
   keyboardType: "numeric" | "default";
   multiline: boolean;
+  label: string;
 };
 const CustomTextInput = (props: CustomTextInputProps) => {
   const { theme } = useTheme();
   return (
-    <TextInput
-      style={[styles.input, { borderColor: theme.mainColor }]}
-      onBlur={props.onBlur}
-      onChangeText={props.onChange}
-      value={props.value}
-      keyboardType={props.keyboardType}
-      multiline={props.multiline}
-    />
+    <>
+      <Text style={styles.label}>{props.label}</Text>
+      <TextInput
+        style={[styles.input, { borderColor: theme.mainColor }]}
+        onBlur={props.onBlur}
+        onChangeText={props.onChange}
+        value={props.value}
+        keyboardType={props.keyboardType}
+        multiline={props.multiline}
+      />
+    </>
   );
 };
 
@@ -31,5 +35,9 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     backgroundColor: "white",
+  },
+  label: {
+    fontSize: 18,
+    marginBottom: 10,
   },
 });

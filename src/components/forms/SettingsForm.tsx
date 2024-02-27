@@ -37,7 +37,6 @@ const SettingsForm = (props: SettingsFormProps) => {
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionHeader}>Default Wait Period (Days)</Text>
         <Controller
           control={control}
           render={({ field }) => (
@@ -47,6 +46,7 @@ const SettingsForm = (props: SettingsFormProps) => {
               keyboardType="numeric"
               onBlur={field.onChange}
               multiline={false}
+              label={"Default Wait Period (Days)"}
             />
           )}
           name="defaultWaitPeriod"
