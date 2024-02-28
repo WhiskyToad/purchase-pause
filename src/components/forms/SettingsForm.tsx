@@ -9,17 +9,24 @@ import Title from "../ui/atoms/Title";
 type SettingsFormProps = {
   toggleModal: () => void;
 };
-const SettingsForm = (props: SettingsFormProps) => {
-  const { control, handleSubmit } = useForm();
 
-  const onSubmit = (data: any) => {
+export type SettingFormData = {
+  defaultCurrency: string;
+  defaultWaitPeriod: string;
+  notificationsEnabled: boolean;
+  notificationsFrequency: string;
+};
+const SettingsForm = (props: SettingsFormProps) => {
+  const { control, handleSubmit } = useForm<SettingFormData>();
+
+  const onSubmit = (data: SettingFormData) => {
     console.log(data);
     // You can handle form submission here
   };
 
   return (
     <>
-      <Title>Settings</Title>
+      <Title>Preferences</Title>
 
       <PickerFormInput
         control={control}
@@ -39,10 +46,21 @@ const SettingsForm = (props: SettingsFormProps) => {
         name="defaultWaitPeriod"
         defaultValue="7"
       />
+      <Title>Notifications</Title>
       <SwitchFormInput
         control={control}
         name={"notificationsEnabled"}
         label={"Enable Notifications"}
+      />
+      <PickerFormInput
+        control={control}
+        name={"notificationsFrequency"}
+        label={"Notification Frequency"}
+        options={[
+          { label: "Daily", value: "daily" },
+          { label: "Weekly", value: "weekly" },
+          { label: "When countdown is 0", value: "countdownZero" },
+        ]}
       />
 
       <CustomButton
