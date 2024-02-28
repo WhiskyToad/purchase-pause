@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
 import TextFormInput from "./components/TextFormInput";
@@ -6,6 +6,7 @@ import PickerFormInput from "./components/PickerFormInput";
 import SwitchFormInput from "./components/SwitchFormInput";
 import Title from "../ui/atoms/Title";
 import { useSetSettings } from "@/hooks/useSetSettings";
+import { useSettings } from "@/contexts/SettingsContext";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -18,12 +19,23 @@ export type SettingFormData = {
   notificationsFrequency: string;
 };
 const SettingsForm = (props: SettingsFormProps) => {
-  const { control, handleSubmit } = useForm<SettingFormData>();
+  const { settings, fetchSettings } = useSettings();
+  const { control, handleSubmit, setValue } = useForm<SettingFormData>();
   const { updateSettings } = useSetSettings();
+
+  useEffect(() => {
+    if (settings) {
+      setValue("defaultCurrency", settings.defaultCurrency);
+      setValue("defaultWaitPeriod", settings.defaultWaitPeriod.toString());
+      setValue("notificationsEnabled", settings.notificationsEnabled);
+      setValue("notificationsFrequency", settings.notificationsFrequency);
+    }
+  }, [settings, setValue]);
 
   const onSubmit = async (data: SettingFormData) => {
     const updateResult = await updateSettings(data);
     if (updateResult) {
+      fetchSettings();
       props.toggleModal();
     }
   };

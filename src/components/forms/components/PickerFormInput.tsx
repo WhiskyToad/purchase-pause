@@ -40,7 +40,13 @@ const PickerFormInput = <T extends FieldValues>({
             style={{ backgroundColor: "#FFFFFF" }}
           >
             {options.map((option) => {
-              return <Picker.Item label={option.label} value={option.value} />;
+              return (
+                <Picker.Item
+                  key={option.value}
+                  label={option.label}
+                  value={option.value}
+                />
+              );
             })}
           </Picker>
         )}
