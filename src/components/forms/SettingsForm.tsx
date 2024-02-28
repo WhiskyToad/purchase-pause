@@ -7,6 +7,7 @@ import SwitchFormInput from "./components/SwitchFormInput";
 import Title from "../ui/atoms/Title";
 import { useSetSettings } from "@/hooks/useSetSettings";
 import { useSettings } from "@/contexts/SettingsContext";
+import { seedSettingsTable } from "@/database/db";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -25,12 +26,17 @@ const SettingsForm = (props: SettingsFormProps) => {
 
   useEffect(() => {
     if (settings) {
+      console.log(settings);
       setValue("defaultCurrency", settings.defaultCurrency);
       setValue("defaultWaitPeriod", settings.defaultWaitPeriod.toString());
       setValue("notificationsEnabled", settings.notificationsEnabled);
       setValue("notificationsFrequency", settings.notificationsFrequency);
     }
   }, [settings, setValue]);
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
 
   const onSubmit = async (data: SettingsFormData) => {
     const updateResult = await updateSettings({
@@ -56,7 +62,6 @@ const SettingsForm = (props: SettingsFormProps) => {
           { label: "€", value: "€" },
           { label: "£", value: "£" },
         ]}
-        defaultValue={"$"}
       />
 
       <TextFormInput
@@ -64,14 +69,12 @@ const SettingsForm = (props: SettingsFormProps) => {
         control={control}
         label={"Default Wait Period (Days)"}
         name="defaultWaitPeriod"
-        defaultValue="4"
       />
       <Title>Notifications</Title>
       <SwitchFormInput
         control={control}
         name={"notificationsEnabled"}
         label={"Enable Notifications"}
-        defaultValue={false}
       />
       <PickerFormInput
         control={control}
@@ -82,7 +85,6 @@ const SettingsForm = (props: SettingsFormProps) => {
           { label: "Weekly", value: "weekly" },
           { label: "When countdown is 0", value: "countdownZero" },
         ]}
-        defaultValue={"daily"}
       />
 
       <CustomButton

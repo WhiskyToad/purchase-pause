@@ -44,7 +44,7 @@ const createSettingsTable = (): Promise<void> => {
       tx => {
         tx.executeSql(
           `CREATE TABLE IF NOT EXISTS Settings (
-            id INTEGER PRIMARY KEY,
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
             defaultCurrency TEXT NOT NULL,
             defaultWaitPeriod INTEGER NOT NULL,
             notificationsEnabled INTEGER NOT NULL,
@@ -92,11 +92,12 @@ const checkSettingsTableIsEmpty = (tx: SQLite.SQLTransaction): Promise<boolean> 
   });
 };
 
-const seedSettingsTable = (tx: SQLite.SQLTransaction): Promise<void> => {
+export const seedSettingsTable = (tx: SQLite.SQLTransaction): Promise<void> => {
   return new Promise((resolve, reject) => {
     tx.executeSql(
-      `INSERT INTO Settings (defaultCurrency, defaultWaitPeriod, notificationsEnabled, notificationsFrequency) VALUES (?, ?, ?, ?)`,
-      ['$','4',0,'daily'], // Default values
+      `INSERT INTO Settings (defaultCurrency, defaultWaitPeriod, notificationsEnabled, notificationsFrequency)
+      VALUES (?, ?, ?, ?)`,
+      ['$', 4 , 0 , 'daily' ], // Default values
       () => {
         console.log('Settings table seeded successfully');
         resolve();
@@ -109,6 +110,7 @@ const seedSettingsTable = (tx: SQLite.SQLTransaction): Promise<void> => {
     );
   });
 };
+
 
 
 export const startDb = async (): Promise<void> => {

@@ -15,34 +15,36 @@ export default function App() {
   const [screen, setScreen] = useState<"current" | "history">("current");
   const { theme } = useTheme();
   useEffect(() => {
-    startDb()
-      .then(() => {
+    const initializeDatabase = async () => {
+      try {
+        await startDb();
+        //TODO - get loading to actually work so it doesnt fetch
         setIsLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("Error starting database:", error);
-      });
-  }, [startDb]);
+      }
+    };
+
+    initializeDatabase();
+  }, []);
 
   return (
     <SettingsProvider>
       <ThemeProvider>
         <NullStatusItemProvider>
           <WithStatusItemProvider>
-            {!isLoading && (
-              <SafeAreaView
-                style={[
-                  styles.container,
-                  { backgroundColor: theme.mainColorLighter },
-                ]}
-              >
-                <Header screen={screen} setScreen={setScreen} />
-                <View style={styles.contentContainer}>
-                  {screen === "current" && <ListScreen />}
-                  {screen === "history" && <HistoryScreen />}
-                </View>
-              </SafeAreaView>
-            )}
+            <SafeAreaView
+              style={[
+                styles.container,
+                { backgroundColor: theme.mainColorLighter },
+              ]}
+            >
+              <Header screen={screen} setScreen={setScreen} />
+              <View style={styles.contentContainer}>
+                {screen === "current" && <ListScreen />}
+                {screen === "history" && <HistoryScreen />}
+              </View>
+            </SafeAreaView>
           </WithStatusItemProvider>
         </NullStatusItemProvider>
       </ThemeProvider>

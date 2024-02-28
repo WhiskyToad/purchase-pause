@@ -43,9 +43,10 @@ export const SettingsProvider = ({
         db.transaction(
           (tx) => {
             tx.executeSql(
-              `SELECT * FROM Settings`,
-              [],
+              `SELECT * FROM Settings WHERE id = ?`,
+              [1], // Specify the id you want to fetch (in this case, 1)
               (_, resultSet) => {
+                console.log(resultSet.rows);
                 const rows = resultSet.rows;
                 if (rows.length > 0) {
                   const settingsData: SettingsData = {
