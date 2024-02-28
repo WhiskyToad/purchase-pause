@@ -5,6 +5,7 @@ import TextFormInput from "./components/TextFormInput";
 import PickerFormInput from "./components/PickerFormInput";
 import SwitchFormInput from "./components/SwitchFormInput";
 import Title from "../ui/atoms/Title";
+import { useSetSettings } from "@/hooks/useSetSettings";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -18,10 +19,13 @@ export type SettingFormData = {
 };
 const SettingsForm = (props: SettingsFormProps) => {
   const { control, handleSubmit } = useForm<SettingFormData>();
+  const { updateSettings } = useSetSettings();
 
-  const onSubmit = (data: SettingFormData) => {
-    console.log(data);
-    // You can handle form submission here
+  const onSubmit = async (data: SettingFormData) => {
+    const updateResult = await updateSettings(data);
+    if (updateResult) {
+      props.toggleModal();
+    }
   };
 
   return (
