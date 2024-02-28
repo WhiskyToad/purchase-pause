@@ -2,7 +2,6 @@ import * as SQLite from 'expo-sqlite';
 
 export const db = SQLite.openDatabase('test-db.db');
 
-// Execute table creation SQL command
 const createPurchaseTable = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     db.transaction(
@@ -41,7 +40,7 @@ const createPurchaseTable = (): Promise<void> => {
 const createSettingsTable = (): Promise<void> => {
   return new Promise((resolve, reject) => {
     db.transaction(
-      tx => {
+      async (tx) => {
         tx.executeSql(
           `CREATE TABLE IF NOT EXISTS Settings (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -53,9 +52,9 @@ const createSettingsTable = (): Promise<void> => {
           [],
           async () => {
             console.log('Settings table created successfully');
-            const isEmpty = await checkSettingsTableIsEmpty(tx);
+            const isEmpty = await checkSettingsTableIsEmpty();
             if (isEmpty) {
-              await seedSettingsTable(tx);
+              await seedSettingsTable();
             }
             resolve();
           },
@@ -66,7 +65,7 @@ const createSettingsTable = (): Promise<void> => {
           }
         );
       },
-      error => {
+      (error) => {
         console.error('Transaction error:', error);
         reject(error);
       }
@@ -74,44 +73,58 @@ const createSettingsTable = (): Promise<void> => {
   });
 };
 
-const checkSettingsTableIsEmpty = (tx: SQLite.SQLTransaction): Promise<boolean> => {
+const checkSettingsTableIsEmpty = (): Promise<boolean> => {
   return new Promise((resolve, reject) => {
-    tx.executeSql(
-      `SELECT COUNT(*) FROM Settings`,
-      [],
-      (_, resultSet) => {
-        const count = resultSet.rows.item(0)['COUNT(*)'];
-        resolve(count === 0);
+    db.transaction(
+      tx => {
+        tx.executeSql(
+          `SELECT COUNT(*) FROM Settings`,
+          [],
+          (_, resultSet) => {
+            const count = resultSet.rows.item(0)['COUNT(*)'];
+            resolve(count === 0);
+          },
+          (_, error) => {
+            console.error('Error checking Settings table:', error);
+            reject(error);
+            return true;
+          }
+        );
       },
-      (_, error) => {
-        console.error('Error checking Settings table:', error);
+      (error) => {
+        console.error('Transaction error:', error);
         reject(error);
-        return true;
       }
     );
   });
 };
 
-export const seedSettingsTable = (tx: SQLite.SQLTransaction): Promise<void> => {
+export const seedSettingsTable = (): Promise<void> => {
   return new Promise((resolve, reject) => {
-    tx.executeSql(
-      `INSERT INTO Settings (defaultCurrency, defaultWaitPeriod, notificationsEnabled, notificationsFrequency)
-      VALUES (?, ?, ?, ?)`,
-      ['$', 4 , 0 , 'daily' ], // Default values
-      () => {
-        console.log('Settings table seeded successfully');
-        resolve();
+    db.transaction(
+      tx => {
+        tx.executeSql(
+          `INSERT INTO Settings (defaultCurrency, defaultWaitPeriod, notificationsEnabled, notificationsFrequency)
+          VALUES (?, ?, ?, ?)`,
+          ['$', 4, 0, 'daily'], // Default values
+          () => {
+            console.log('Settings table seeded successfully');
+            resolve();
+          },
+          (_, error) => {
+            console.error('Error seeding Settings table:', error);
+            reject(error);
+            return true;
+          }
+        );
       },
-      (_, error) => {
-        console.error('Error seeding Settings table:', error);
+      (error) => {
+        console.error('Transaction error:', error);
         reject(error);
-        return true;
       }
     );
   });
 };
-
-
 
 export const startDb = async (): Promise<void> => {
   try {

@@ -26,7 +26,6 @@ const SettingsForm = (props: SettingsFormProps) => {
 
   useEffect(() => {
     if (settings) {
-      console.log(settings);
       setValue("defaultCurrency", settings.defaultCurrency);
       setValue("defaultWaitPeriod", settings.defaultWaitPeriod.toString());
       setValue("notificationsEnabled", settings.notificationsEnabled);
