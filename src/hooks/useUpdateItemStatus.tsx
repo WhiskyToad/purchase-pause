@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { db } from "@/database/db";
+import { useWithStatusItemContext } from "@/contexts/WithStatusItemsContext";
 
 const useUpdateItemStatus = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const { fetchData } = useWithStatusItemContext();
 
   const updateItemStatus = async (
     itemId: number,
@@ -34,6 +36,7 @@ const useUpdateItemStatus = () => {
           );
         });
       });
+      fetchData();
       return true;
     } catch (error) {
       console.error("Error updating item status in database:", error);
