@@ -1,26 +1,27 @@
-import type { SettingFormData } from "@/components/forms/SettingsForm";
+import type { SettingsFormData } from "@/components/forms/SettingsForm";
 import { db } from "@/database/db";
 
+interface UpdateSettingsData extends SettingsFormData {
+  id: number;
+}
+
 export const useSetSettings = () => {
-  const updateSettings = async (formData: SettingFormData) => {
+  const updateSettings = async (formData: UpdateSettingsData) => {
     try {
       await new Promise<void>((resolve, reject) => {
         db.transaction(
           (tx) => {
             tx.executeSql(
-              `
-                INSERT OR REPLACE INTO Settings (
-                  defaultCurrency, 
-                  defaultWaitPeriod, 
-                  notificationsEnabled, 
-                  notificationsFrequency
-                ) VALUES (?, ?, ?, ?)
+              `UPDATE Settings 
+              SET defaultCurrency = ?, defaultWaitPeriod = ?, notificationsEnabled = ?, notificationsFrequency = ?
+              WHERE id = ?
               `,
               [
                 formData.defaultCurrency,
                 formData.defaultWaitPeriod,
                 formData.notificationsEnabled ? 1 : 0,
                 formData.notificationsFrequency,
+                formData.id,
               ],
               (_, resultSet) => {
                 console.log("Settings updated successfully");

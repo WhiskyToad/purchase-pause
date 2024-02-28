@@ -8,6 +8,7 @@ import React, {
 import { db } from "../database/db";
 
 export type SettingsData = {
+  id: number;
   defaultCurrency: string;
   defaultWaitPeriod: number;
   notificationsEnabled: boolean;
@@ -48,6 +49,7 @@ export const SettingsProvider = ({
                 const rows = resultSet.rows;
                 if (rows.length > 0) {
                   const settingsData: SettingsData = {
+                    id: rows.item(0).id,
                     defaultCurrency: rows.item(0).defaultCurrency,
                     defaultWaitPeriod: rows.item(0).defaultWaitPeriod,
                     notificationsEnabled: !!rows.item(0).notificationsEnabled,

@@ -12,15 +12,15 @@ type SettingsFormProps = {
   toggleModal: () => void;
 };
 
-export type SettingFormData = {
+export interface SettingsFormData {
   defaultCurrency: string;
   defaultWaitPeriod: string;
   notificationsEnabled: boolean;
   notificationsFrequency: string;
-};
+}
 const SettingsForm = (props: SettingsFormProps) => {
   const { settings, fetchSettings } = useSettings();
-  const { control, handleSubmit, setValue } = useForm<SettingFormData>();
+  const { control, handleSubmit, setValue } = useForm<SettingsFormData>();
   const { updateSettings } = useSetSettings();
 
   useEffect(() => {
@@ -32,8 +32,11 @@ const SettingsForm = (props: SettingsFormProps) => {
     }
   }, [settings, setValue]);
 
-  const onSubmit = async (data: SettingFormData) => {
-    const updateResult = await updateSettings(data);
+  const onSubmit = async (data: SettingsFormData) => {
+    const updateResult = await updateSettings({
+      ...data,
+      id: settings?.id || 1,
+    });
     if (updateResult) {
       fetchSettings();
       props.toggleModal();
