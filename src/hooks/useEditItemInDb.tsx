@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { db } from "@/database/db";
-import type { AddItemFormData } from "@/components/forms/AddItemForm";
+import { AddItemFormData } from "@/components/forms/AddItemForm";
 
 const useEditItemInDb = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);

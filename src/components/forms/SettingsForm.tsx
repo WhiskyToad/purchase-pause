@@ -41,6 +41,7 @@ const SettingsForm = (props: SettingsFormProps) => {
           { label: "€", value: "€" },
           { label: "£", value: "£" },
         ]}
+        defaultValue={"$"}
       />
 
       <TextFormInput
@@ -48,13 +49,14 @@ const SettingsForm = (props: SettingsFormProps) => {
         control={control}
         label={"Default Wait Period (Days)"}
         name="defaultWaitPeriod"
-        defaultValue="7"
+        defaultValue="4"
       />
       <Title>Notifications</Title>
       <SwitchFormInput
         control={control}
         name={"notificationsEnabled"}
         label={"Enable Notifications"}
+        defaultValue={false}
       />
       <PickerFormInput
         control={control}
@@ -65,6 +67,7 @@ const SettingsForm = (props: SettingsFormProps) => {
           { label: "Weekly", value: "weekly" },
           { label: "When countdown is 0", value: "countdownZero" },
         ]}
+        defaultValue={"daily"}
       />
 
       <CustomButton

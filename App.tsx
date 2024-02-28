@@ -1,5 +1,6 @@
 import Header from "@/components/ui/molecules/Header";
 import { NullStatusItemProvider } from "@/contexts/NullStatusItemsContext";
+import { SettingsProvider } from "@/contexts/SettingsContext";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { WithStatusItemProvider } from "@/contexts/WithStatusItemsContext";
 import { startDb } from "@/database/db";
@@ -24,26 +25,28 @@ export default function App() {
   }, [startDb]);
 
   return (
-    <ThemeProvider>
-      <NullStatusItemProvider>
-        <WithStatusItemProvider>
-          {!isLoading && (
-            <SafeAreaView
-              style={[
-                styles.container,
-                { backgroundColor: theme.mainColorLighter },
-              ]}
-            >
-              <Header screen={screen} setScreen={setScreen} />
-              <View style={styles.contentContainer}>
-                {screen === "current" && <ListScreen />}
-                {screen === "history" && <HistoryScreen />}
-              </View>
-            </SafeAreaView>
-          )}
-        </WithStatusItemProvider>
-      </NullStatusItemProvider>
-    </ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider>
+        <NullStatusItemProvider>
+          <WithStatusItemProvider>
+            {!isLoading && (
+              <SafeAreaView
+                style={[
+                  styles.container,
+                  { backgroundColor: theme.mainColorLighter },
+                ]}
+              >
+                <Header screen={screen} setScreen={setScreen} />
+                <View style={styles.contentContainer}>
+                  {screen === "current" && <ListScreen />}
+                  {screen === "history" && <HistoryScreen />}
+                </View>
+              </SafeAreaView>
+            )}
+          </WithStatusItemProvider>
+        </NullStatusItemProvider>
+      </ThemeProvider>
+    </SettingsProvider>
   );
 }
 

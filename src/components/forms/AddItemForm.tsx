@@ -12,7 +12,7 @@ type AddItemFormProps = {
   toggleModal: () => void;
 };
 
-type AddItemFormData = {
+export type AddItemFormData = {
   itemName: string;
   description: string;
   cost: string;
@@ -30,6 +30,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
     if (dbInsert) {
       fetchData();
       reset();
+      toggleModal();
     }
   };
 
