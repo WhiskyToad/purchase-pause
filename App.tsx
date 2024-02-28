@@ -8,7 +8,12 @@ import HistoryScreen from "@/screens/HistoryScreen";
 import ListScreen from "@/screens/ListScreen";
 import { useEffect, useState } from "react";
 
-import { SafeAreaView, StyleSheet, View } from "react-native";
+import {
+  ActivityIndicator,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from "react-native";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +23,6 @@ export default function App() {
     const initializeDatabase = async () => {
       try {
         await startDb();
-        //TODO - get loading to actually work so it doesnt fetch
         setIsLoading(false);
       } catch (error) {
         console.error("Error starting database:", error);
@@ -27,6 +31,16 @@ export default function App() {
 
     initializeDatabase();
   }, []);
+
+  if (isLoading) {
+    return (
+      <View
+        style={[styles.container, { backgroundColor: theme.mainColorLighter }]}
+      >
+        <ActivityIndicator size="large" color={theme.mainColor} />
+      </View>
+    );
+  }
 
   return (
     <SettingsProvider>
