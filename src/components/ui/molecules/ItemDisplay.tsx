@@ -9,6 +9,7 @@ import type {
 import CustomButton from "../atoms/CustomButton";
 import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
+import { useSettings } from "@/contexts/SettingsContext";
 
 type ItemDisplayProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -20,6 +21,7 @@ const ItemDisplay = (props: ItemDisplayProps) => {
   const { theme } = useTheme();
   const { updateItemStatus } = useUpdateItemStatus();
   const { fetchData } = useNullStatusItemContext();
+  const { settings } = useSettings();
 
   const toggleModal = () => {
     setShowEditModal(!showEditModal);
@@ -46,7 +48,10 @@ const ItemDisplay = (props: ItemDisplayProps) => {
       <Text style={{ color: theme.textColor, fontSize: 16, marginBottom: 5 }}>
         {props.item.itemName}
       </Text>
-      <Text style={{ color: theme.textColor }}>Cost: {props.item.cost}</Text>
+      <Text style={{ color: theme.textColor }}>
+        Cost: {settings?.defaultCurrency}
+        {props.item.cost}
+      </Text>
       {"daysLeft" in props.item && (
         <Text style={{ color: theme.textColor }}>
           Days Left: {props.item.daysLeft}
