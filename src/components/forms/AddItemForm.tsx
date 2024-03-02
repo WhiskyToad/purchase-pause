@@ -1,12 +1,11 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
 import { useForm } from "react-hook-form";
-import { useTheme } from "@/contexts/ThemeContext";
 import CustomButton from "../ui/atoms/CustomButton";
 import useAddItemToDb from "@/hooks/useAddItemToDb";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import TextFormInput from "./components/TextFormInput";
 import Title from "../ui/atoms/Title";
+import { useSettings } from "@/contexts/SettingsContext";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -21,9 +20,9 @@ export type AddItemFormData = {
 
 const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
   const { control, handleSubmit, reset } = useForm<AddItemFormData>();
-  const { theme } = useTheme();
   const { addItemToDb } = useAddItemToDb();
   const { fetchData } = useNullStatusItemContext();
+  const { settings } = useSettings();
 
   const onSubmit = async (data: AddItemFormData) => {
     const dbInsert = await addItemToDb(data);
@@ -67,7 +66,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         name="duration"
         label="Duration (in days)"
         rules={{ required: true }}
-        defaultValue=""
+        defaultValue={settings?.defaultWaitPeriod.toString() ?? ""}
         keyboardType="numeric"
       />
 
