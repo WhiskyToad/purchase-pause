@@ -1,12 +1,9 @@
+import ScrollableContainer from "@/components/ui/atoms/ScrollableContainer";
 import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
-import type {
-  PurchaseItem,
-  PurchaseItemWithCountdown,
-} from "@/types/item.types";
+import type { PurchaseItemWithCountdown } from "@/types/item.types";
 import { calculateDaysLeft } from "@/utils/utils";
 import { useMemo } from "react";
-import { View } from "react-native";
 
 const ListScreen = () => {
   const { items } = useNullStatusItemContext();
@@ -24,18 +21,11 @@ const ListScreen = () => {
   }, [items]);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        paddingTop: 12,
-        justifyContent: "flex-start",
-        alignItems: "flex-start",
-      }}
-    >
+    <ScrollableContainer>
       {itemsSortedWithCountdown.map((item) => {
         return <ItemDisplay key={item.id} item={item} />;
       })}
-    </View>
+    </ScrollableContainer>
   );
 };
 
