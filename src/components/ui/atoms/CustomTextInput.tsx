@@ -14,6 +14,7 @@ type CustomTextInputProps = {
   keyboardType: KeyboardTypeOptions;
   multiline: boolean;
   label: string;
+  placeholder?: string;
 };
 const CustomTextInput = (props: CustomTextInputProps) => {
   const { theme } = useTheme();
@@ -27,6 +28,7 @@ const CustomTextInput = (props: CustomTextInputProps) => {
         value={props.value}
         keyboardType={props.keyboardType}
         multiline={props.multiline}
+        placeholder={props.placeholder}
       />
     </>
   );

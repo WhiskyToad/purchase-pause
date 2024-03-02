@@ -42,6 +42,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         label="Item Name"
         rules={{ required: true }}
         defaultValue=""
+        placeholder="What do you want to buy?"
       />
 
       <TextFormInput
@@ -50,6 +51,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         label="Description"
         defaultValue=""
         multiline
+        placeholder="Why do you want to buy this?"
       />
 
       <TextFormInput
@@ -59,6 +61,7 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         rules={{ required: true }}
         defaultValue=""
         keyboardType="numeric"
+        placeholder={settings?.defaultCurrency}
       />
 
       <TextFormInput

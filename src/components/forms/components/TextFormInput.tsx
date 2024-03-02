@@ -16,6 +16,7 @@ type FormInputProps<T extends FieldValues> = {
   defaultValue?: PathValue<T, Path<T>>;
   keyboardType?: KeyboardTypeOptions;
   multiline?: boolean;
+  placeholder?: string;
 };
 
 const TextFormInput = <T extends FieldValues>({
@@ -26,6 +27,7 @@ const TextFormInput = <T extends FieldValues>({
   defaultValue,
   keyboardType = "default",
   multiline = false,
+  placeholder,
 }: FormInputProps<T>) => {
   return (
     <Controller
@@ -38,6 +40,7 @@ const TextFormInput = <T extends FieldValues>({
           keyboardType={keyboardType}
           multiline={multiline}
           label={label}
+          placeholder={placeholder}
         />
       )}
       name={name}
