@@ -10,6 +10,7 @@ import CustomButton from "../atoms/CustomButton";
 import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import { useSettings } from "@/contexts/SettingsContext";
+import Title from "../atoms/Title";
 
 type ItemDisplayProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -45,18 +46,28 @@ const ItemDisplay = (props: ItemDisplayProps) => {
         },
       ]}
     >
-      <Text style={{ color: theme.textColor, fontSize: 16, marginBottom: 5 }}>
-        {props.item.itemName}
-      </Text>
-      <Text style={{ color: theme.textColor }}>
-        Cost: {settings?.defaultCurrency}
-        {props.item.cost}
-      </Text>
-      {"daysLeft" in props.item && (
-        <Text style={{ color: theme.textColor }}>
-          Days Left: {props.item.daysLeft}
-        </Text>
-      )}
+      <View style={styles.topRow}>
+        <Title>{props.item.itemName}</Title>
+        <View>
+          <Text style={{ color: theme.textColor }}>
+            Cost: {settings?.defaultCurrency}
+            {props.item.cost}
+          </Text>
+          {"daysLeft" in props.item && (
+            <Text
+              style={[
+                {
+                  color: theme.textColor,
+                  fontWeight: props.item.daysLeft === 0 ? "bold" : "normal",
+                },
+              ]}
+            >
+              Days Left: {props.item.daysLeft}
+            </Text>
+          )}
+        </View>
+      </View>
+      {props.item.description && <Text>{props.item.description}</Text>}
 
       {!Boolean(props.isHistory) && (
         <>
@@ -89,5 +100,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     width: "100%",
     marginVertical: 4,
+  },
+  topRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
 });
