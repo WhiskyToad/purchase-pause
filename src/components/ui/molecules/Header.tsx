@@ -1,6 +1,7 @@
 import AddModal from "@/components/modals/AddModal";
 import SettingsModal from "@/components/modals/SettingsModal";
 import { useTheme } from "@/contexts/ThemeContext";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 
@@ -35,14 +36,18 @@ const Header = (props: HeaderProps) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleAddModal} style={styles.button}>
-          <Text style={[styles.buttonText, { color: theme.textColor }]}>
-            Add
-          </Text>
+          <MaterialCommunityIcons
+            name="plus"
+            size={24}
+            color={theme.textColor}
+          />
         </TouchableOpacity>
         <TouchableOpacity onPress={toggleSettingModal} style={styles.button}>
-          <Text style={[styles.buttonText, { color: theme.textColor }]}>
-            Settings
-          </Text>
+          <MaterialCommunityIcons
+            name="cog"
+            size={24}
+            color={theme.textColor}
+          />
         </TouchableOpacity>
       </View>
       {isAddVisible && (
@@ -61,7 +66,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingVertical: 10,
+    paddingTop: 24,
+    paddingBottom: 16,
     paddingHorizontal: 20,
   },
   title: {
