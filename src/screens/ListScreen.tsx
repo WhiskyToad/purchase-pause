@@ -1,4 +1,5 @@
 import ScrollableContainer from "@/components/ui/atoms/ScrollableContainer";
+import Title from "@/components/ui/atoms/Title";
 import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import type { PurchaseItemWithCountdown } from "@/types/item.types";
@@ -22,6 +23,7 @@ const ListScreen = () => {
 
   return (
     <ScrollableContainer>
+      <Title>Purchase Pauses</Title>
       {itemsSortedWithCountdown.map((item) => {
         return <ItemDisplay key={item.id} item={item} />;
       })}

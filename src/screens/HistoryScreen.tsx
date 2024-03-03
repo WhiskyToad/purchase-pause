@@ -1,4 +1,5 @@
 import ScrollableContainer from "@/components/ui/atoms/ScrollableContainer";
+import Title from "@/components/ui/atoms/Title";
 import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
 import { useWithStatusItemContext } from "@/contexts/WithStatusItemsContext";
 
@@ -6,6 +7,7 @@ const HistoryScreen = () => {
   const { items } = useWithStatusItemContext();
   return (
     <ScrollableContainer>
+      <Title>Purchase History</Title>
       {items.map((item) => {
         return <ItemDisplay key={item.id} item={item} isHistory />;
       })}
