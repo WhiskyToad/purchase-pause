@@ -4,6 +4,7 @@ import { SettingsProvider } from "@/contexts/SettingsContext";
 import { ThemeProvider, useTheme } from "@/contexts/ThemeContext";
 import { WithStatusItemProvider } from "@/contexts/WithStatusItemsContext";
 import { startDb } from "@/database/db";
+import useNotificationPermissions from "@/hooks/useNotificationPermissions";
 import useNotificationSettings from "@/hooks/useNotificationSettings";
 import HistoryScreen from "@/screens/HistoryScreen";
 import ListScreen from "@/screens/ListScreen";
@@ -19,8 +20,12 @@ import {
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [screen, setScreen] = useState<"current" | "history">("current");
+
   const { theme } = useTheme();
+
   useNotificationSettings();
+  useNotificationPermissions();
+
   useEffect(() => {
     const initializeDatabase = async () => {
       try {
