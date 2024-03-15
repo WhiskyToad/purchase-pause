@@ -11,6 +11,7 @@ import useUpdateItemStatus from "@/hooks/useUpdateItemStatus";
 import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import { useSettings } from "@/contexts/SettingsContext";
 import Title from "../atoms/Title";
+import StackButtonContainer from "../atoms/StackedButtonContainer";
 
 type ItemDisplayProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -70,14 +71,14 @@ const ItemDisplay = (props: ItemDisplayProps) => {
       {props.item.description && <Text>{props.item.description}</Text>}
 
       {!Boolean(props.isHistory) && (
-        <>
+        <StackButtonContainer>
           <CustomButton onPress={toggleModal} variant="primary" text="Edit" />
           <CustomButton
             onPress={markAsPurchased}
             variant="secondary"
             text="Purchased"
           />
-        </>
+        </StackButtonContainer>
       )}
 
       {showEditModal && (

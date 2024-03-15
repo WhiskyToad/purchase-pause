@@ -8,6 +8,7 @@ import Title from "../ui/atoms/Title";
 import { useSetSettings } from "@/hooks/useSetSettings";
 import { useSettings } from "@/contexts/SettingsContext";
 import { seedSettingsTable } from "@/database/db";
+import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -85,17 +86,18 @@ const SettingsForm = (props: SettingsFormProps) => {
           { label: "When countdown is 0", value: "countdownZero" },
         ]}
       />
-
-      <CustomButton
-        onPress={handleSubmit(onSubmit)}
-        text={"Save"}
-        variant={"primary"}
-      />
-      <CustomButton
-        onPress={props.toggleModal}
-        variant={"secondary"}
-        text={"Cancel"}
-      />
+      <StackButtonContainer>
+        <CustomButton
+          onPress={handleSubmit(onSubmit)}
+          text={"Save"}
+          variant={"primary"}
+        />
+        <CustomButton
+          onPress={props.toggleModal}
+          variant={"secondary"}
+          text={"Cancel"}
+        />
+      </StackButtonContainer>
     </>
   );
 };

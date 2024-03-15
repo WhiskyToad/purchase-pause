@@ -10,6 +10,7 @@ import type {
 } from "@/types/item.types";
 import TextFormInput from "./components/TextFormInput";
 import Title from "../ui/atoms/Title";
+import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
 
 type EditItemFormProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -84,18 +85,19 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
         rules={{ required: true }}
         keyboardType="numeric"
       />
-
-      <CustomButton
-        onPress={handleSubmit(onSubmit)}
-        variant="primary"
-        text="Submit"
-      />
-      <CustomButton
-        onPress={markAsNotPurchased}
-        variant="secondary"
-        text="Remove Item"
-      />
-      <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
+      <StackButtonContainer>
+        <CustomButton
+          onPress={handleSubmit(onSubmit)}
+          variant="primary"
+          text="Submit"
+        />
+        <CustomButton
+          onPress={markAsNotPurchased}
+          variant="secondary"
+          text="Remove Item"
+        />
+        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
+      </StackButtonContainer>
     </>
   );
 };

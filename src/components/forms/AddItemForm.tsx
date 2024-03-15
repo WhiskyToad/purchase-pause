@@ -6,6 +6,7 @@ import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import TextFormInput from "./components/TextFormInput";
 import Title from "../ui/atoms/Title";
 import { useSettings } from "@/contexts/SettingsContext";
+import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -72,13 +73,14 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         defaultValue={settings?.defaultWaitPeriod.toString() ?? ""}
         keyboardType="numeric"
       />
-
-      <CustomButton
-        onPress={handleSubmit(onSubmit)}
-        variant="primary"
-        text="Submit"
-      />
-      <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
+      <StackButtonContainer>
+        <CustomButton
+          onPress={handleSubmit(onSubmit)}
+          variant="primary"
+          text="Submit"
+        />
+        <CustomButton onPress={toggleModal} variant="secondary" text="Cancel" />
+      </StackButtonContainer>
     </>
   );
 };
