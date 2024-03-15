@@ -15,16 +15,29 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.purchase-pause",
+      "runtimeVersion": "1.0.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
+      },
+      "runtimeVersion": {
+        "policy": "appVersion"
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "111bdc33-a8f8-4bba-bb7c-cf22a7ecdc8d"
+      }
+    },
+    "updates": {
+      "url": "https://u.expo.dev/111bdc33-a8f8-4bba-bb7c-cf22a7ecdc8d"
     }
   }
 }
