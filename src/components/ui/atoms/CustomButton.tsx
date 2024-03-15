@@ -36,7 +36,6 @@ const CustomButton = (props: CustomButtonProps) => {
 
 const styles = StyleSheet.create({
   button: {
-    marginTop: 10,
     alignItems: "center",
     paddingVertical: 10,
     paddingHorizontal: 20,

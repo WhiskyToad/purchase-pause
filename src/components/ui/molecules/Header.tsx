@@ -4,6 +4,7 @@ import { useTheme } from "@/contexts/ThemeContext";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import CustomButton from "../atoms/CustomButton";
 
 type HeaderProps = {
   screen: "current" | "history";
@@ -30,22 +31,13 @@ const Header = (props: HeaderProps) => {
     <View style={[styles.container, { backgroundColor: theme.mainColor }]}>
       <Text style={[styles.title, { color: theme.textColor }]}>My App</Text>
       <View style={styles.buttonContainer}>
+        <CustomButton variant="secondary" text="Add" onPress={toggleAddModal} />
         <TouchableOpacity
           onPress={toggleScreen}
           style={[styles.button, { borderColor: theme.textColor }]}
         >
           <MaterialCommunityIcons
             name="history"
-            size={24}
-            color={theme.textColor}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={toggleAddModal}
-          style={[styles.button, { borderColor: theme.textColor }]}
-        >
-          <MaterialCommunityIcons
-            name="plus"
             size={24}
             color={theme.textColor}
           />
