@@ -29,6 +29,7 @@ const CustomTextInput = (props: CustomTextInputProps) => {
         keyboardType={props.keyboardType}
         multiline={props.multiline}
         placeholder={props.placeholder}
+        returnKeyType="done"
       />
     </>
   );
