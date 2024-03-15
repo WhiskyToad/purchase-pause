@@ -9,7 +9,7 @@ import {
 
 type CustomTextInputProps = {
   onBlur: () => void;
-  onChange: () => void;
+  onChange: (text: string) => void;
   value: string;
   keyboardType: KeyboardTypeOptions;
   multiline: boolean;

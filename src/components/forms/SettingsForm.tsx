@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import CustomButton from "../ui/atoms/CustomButton";
-import TextFormInput from "./components/TextFormInput";
 import PickerFormInput from "./components/PickerFormInput";
 import SwitchFormInput from "./components/SwitchFormInput";
 import Title from "../ui/atoms/Title";
@@ -9,6 +8,7 @@ import { useSetSettings } from "@/hooks/useSetSettings";
 import { useSettings } from "@/contexts/SettingsContext";
 import { seedSettingsTable } from "@/database/db";
 import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
+import NumberFormInput from "./components/NumericFormInput";
 
 type SettingsFormProps = {
   toggleModal: () => void;
@@ -64,8 +64,7 @@ const SettingsForm = (props: SettingsFormProps) => {
         ]}
       />
 
-      <TextFormInput
-        keyboardType="numeric"
+      <NumberFormInput
         control={control}
         label={"Default Wait Period (Days)"}
         name="defaultWaitPeriod"

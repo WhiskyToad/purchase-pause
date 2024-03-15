@@ -11,6 +11,7 @@ import type {
 import TextFormInput from "./components/TextFormInput";
 import Title from "../ui/atoms/Title";
 import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
+import NumberFormInput from "./components/NumericFormInput";
 
 type EditItemFormProps = {
   item: PurchaseItem | PurchaseItemWithCountdown;
@@ -70,20 +71,18 @@ const EditItemForm = ({ item, toggleModal }: EditItemFormProps) => {
         multiline
       />
 
-      <TextFormInput
+      <NumberFormInput
         control={control}
         name="cost"
         label="Cost"
         rules={{ required: true }}
-        keyboardType="numeric"
       />
 
-      <TextFormInput
+      <NumberFormInput
         control={control}
         name="duration"
         label="Duration (in days)"
         rules={{ required: true }}
-        keyboardType="numeric"
       />
       <StackButtonContainer>
         <CustomButton

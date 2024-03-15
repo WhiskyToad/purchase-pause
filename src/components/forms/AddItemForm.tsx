@@ -7,6 +7,7 @@ import TextFormInput from "./components/TextFormInput";
 import Title from "../ui/atoms/Title";
 import { useSettings } from "@/contexts/SettingsContext";
 import StackButtonContainer from "../ui/atoms/StackedButtonContainer";
+import NumberFormInput from "./components/NumericFormInput";
 
 type AddItemFormProps = {
   toggleModal: () => void;
@@ -55,23 +56,21 @@ const AddItemForm = ({ toggleModal }: AddItemFormProps) => {
         placeholder="Why do you want to buy this?"
       />
 
-      <TextFormInput
+      <NumberFormInput
         control={control}
         name="cost"
         label="Cost"
         rules={{ required: true }}
         defaultValue=""
-        keyboardType="numeric"
         placeholder={settings?.defaultCurrency}
       />
 
-      <TextFormInput
+      <NumberFormInput
         control={control}
         name="duration"
         label="Duration (in days)"
         rules={{ required: true }}
         defaultValue={settings?.defaultWaitPeriod.toString() ?? ""}
-        keyboardType="numeric"
       />
       <StackButtonContainer>
         <CustomButton
