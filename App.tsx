@@ -23,6 +23,12 @@ export default function App() {
 
   const { theme } = useTheme();
 
+  const toggleScreen = () => {
+    setScreen((currentScreen) =>
+      currentScreen === "current" ? "history" : "current"
+    );
+  };
+
   useNotificationSettings();
   useNotificationPermissions();
 
@@ -60,10 +66,14 @@ export default function App() {
                 { backgroundColor: theme.mainColorLighter },
               ]}
             >
-              <Header screen={screen} setScreen={setScreen} />
+              <Header />
               <View style={styles.contentContainer}>
-                {screen === "current" && <ListScreen />}
-                {screen === "history" && <HistoryScreen />}
+                {screen === "current" && (
+                  <ListScreen toggleScreen={toggleScreen} />
+                )}
+                {screen === "history" && (
+                  <HistoryScreen toggleScreen={toggleScreen} />
+                )}
               </View>
             </SafeAreaView>
           </WithStatusItemProvider>

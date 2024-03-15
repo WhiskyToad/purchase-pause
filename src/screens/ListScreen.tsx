@@ -1,3 +1,4 @@
+import CustomButton from "@/components/ui/atoms/CustomButton";
 import ScrollableContainer from "@/components/ui/atoms/ScrollableContainer";
 import Title from "@/components/ui/atoms/Title";
 import ItemDisplay from "@/components/ui/molecules/ItemDisplay";
@@ -5,8 +6,13 @@ import { useNullStatusItemContext } from "@/contexts/NullStatusItemsContext";
 import type { PurchaseItemWithCountdown } from "@/types/item.types";
 import { calculateDaysLeft } from "@/utils/utils";
 import { useMemo } from "react";
+import { StyleSheet, View } from "react-native";
 
-const ListScreen = () => {
+export interface ScreenProps {
+  toggleScreen: () => void;
+}
+
+const ListScreen = (props: ScreenProps) => {
   const { items } = useNullStatusItemContext();
 
   const itemsSortedWithCountdown = useMemo(() => {
@@ -23,7 +29,14 @@ const ListScreen = () => {
 
   return (
     <ScrollableContainer>
-      <Title>Purchase Pauses</Title>
+      <View style={styles.titleContainer}>
+        <Title>Purchase Pauses</Title>
+        <CustomButton
+          variant="secondary"
+          text="History"
+          onPress={props.toggleScreen}
+        />
+      </View>
       {itemsSortedWithCountdown.map((item) => {
         return <ItemDisplay key={item.id} item={item} />;
       })}
@@ -32,3 +45,12 @@ const ListScreen = () => {
 };
 
 export default ListScreen;
+
+const styles = StyleSheet.create({
+  titleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+});

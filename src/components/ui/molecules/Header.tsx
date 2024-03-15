@@ -6,11 +6,7 @@ import { useState } from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import CustomButton from "../atoms/CustomButton";
 
-type HeaderProps = {
-  screen: "current" | "history";
-  setScreen: (screen: "current" | "history") => void;
-};
-const Header = (props: HeaderProps) => {
+const Header = () => {
   const { theme } = useTheme();
   const [isAddVisible, setIsAddVisible] = useState(false);
   const [isSettingsVisible, setIsSettingsVisible] = useState(false);
@@ -22,26 +18,11 @@ const Header = (props: HeaderProps) => {
   const toggleSettingModal = () => {
     setIsSettingsVisible(!isSettingsVisible);
   };
-
-  const toggleScreen = () => {
-    props.setScreen(props.screen === "current" ? `history` : `current`);
-  };
-
   return (
     <View style={[styles.container, { backgroundColor: theme.mainColor }]}>
       <Text style={[styles.title, { color: theme.textColor }]}>My App</Text>
       <View style={styles.buttonContainer}>
         <CustomButton variant="secondary" text="Add" onPress={toggleAddModal} />
-        <TouchableOpacity
-          onPress={toggleScreen}
-          style={[styles.button, { borderColor: theme.textColor }]}
-        >
-          <MaterialCommunityIcons
-            name="history"
-            size={24}
-            color={theme.textColor}
-          />
-        </TouchableOpacity>
         <TouchableOpacity
           onPress={toggleSettingModal}
           style={[styles.button, { borderColor: theme.textColor }]}
